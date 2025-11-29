@@ -7,12 +7,10 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, MatSlideToggleModule],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class App {
-  public kasd: string = "";
+  public kasd: string = '';
   protected readonly title = signal('angular-learn');
-
- 
 }
