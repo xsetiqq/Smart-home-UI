@@ -6,18 +6,15 @@
   color: #fff;
 }
 
-/* убираем/заменяем глобальное правило button { position: fixed } если есть */
-
-/* Фиксированная кнопка меню */
 .app-menu-btn {
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 3000; /* выше, чем у sidenav и контента */
+  z-index: 3000;
   pointer-events: auto;
 }
 
-/* Контейнер мат-сайднава занимает всё доступное пространство */
+
 .container-mat-sidenav {
   height: 100%;
   width: 100%;
@@ -34,7 +31,7 @@
 .sidebar-header h1 {
   font-size: 24px;
   font-weight: 600;
-  color: #ffffff;
+  color: #dddddd;
   padding: 0;
   margin: 0;
   font-weight: 500;
@@ -56,9 +53,9 @@ mat-sidenav-content {
   overflow-y: auto;
 }
 
-/* Пример легкой типографики */
-p {
-  margin: 0 0 12px;
+mat-icon {
+ 
+  color: #dddddd;
 }
 
 .example-radio-group {
@@ -84,7 +81,7 @@ p {
   align-items: center;
   gap: 12px;
 
-  color: #e0e0e0;
+  color: #dddddd;
   font-size: 0.95rem;
   font-weight: 500;
 }

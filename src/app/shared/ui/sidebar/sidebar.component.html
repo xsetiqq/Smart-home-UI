@@ -1,13 +1,23 @@
 <div class="sidebar-inner">
-  <div class="brand">Smart Home UI</div>
   <nav class="menu">
-    <a routerLink="/dashboard/overview" (click)="navigate.emit()" class="menu-item">Overview</a>
-    <a routerLink="/dashboard/lights" (click)="navigate.emit()" class="menu-item">Lights</a>
-    <a routerLink="/about" (click)="navigate.emit()" class="menu-item">About</a>
-  </nav>
 
-  <div class="footer">
-    <div class="avatar">RS</div>
-    <div class="name">RS School. Angular</div>
-  </div>
+    <a 
+      routerLink="/dashboard"
+      routerLinkActive="active"
+    
+      class="menu-item"
+    >
+     <mat-icon>apps</mat-icon> Overview
+    </a>
+
+    <a 
+      routerLink="/about"
+      routerLinkActive="active"
+    
+      class="menu-item"
+    >
+     <mat-icon>info</mat-icon> About
+    </a>
+
+  </nav>
 </div>

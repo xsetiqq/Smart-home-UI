@@ -7,6 +7,7 @@ import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { SidebarComponent } from "./shared/ui/sidebar/sidebar.component";
 
 
 @Component({
@@ -20,7 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-  ],
+    SidebarComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
