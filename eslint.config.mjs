@@ -18,8 +18,7 @@ export default [
       unicorn: eslintPluginUnicorn,
       '@typescript-eslint': eslintPluginTs,
     },
-    rules: {
-      '@typescript-eslint/explicit-function-return-type': 'warn',
+    rules: {    
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       'unicorn/filename-case': [

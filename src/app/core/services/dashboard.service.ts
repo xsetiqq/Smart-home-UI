@@ -11,8 +11,8 @@ export class DashboardService {
   private http: HttpClient;
   private readonly url = '/data/mock-data.json';
 
-  constructor(http_с: HttpClient) {
-    this.http = http_с;
+  constructor(http_c: HttpClient) {
+    this.http = http_c;
   }
 
   getRaw(): Observable<Dashboard> {

@@ -1,0 +1,111 @@
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #121212;
+  color: #fff;
+}
+
+/* убираем/заменяем глобальное правило button { position: fixed } если есть */
+
+/* Фиксированная кнопка меню */
+.app-menu-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 3000; /* выше, чем у sidenav и контента */
+  pointer-events: auto;
+}
+
+/* Контейнер мат-сайднава занимает всё доступное пространство */
+.container-mat-sidenav {
+  height: 100%;
+  width: 100%;
+  background: #1a1a1a;
+}
+.sidebar-header {
+  width: auto;
+  padding-top: 20px;
+  margin-left: 25px;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.sidebar-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+}
+/* Левая панель */
+mat-sidenav {
+  width: 300px;
+
+  background: #252525;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
+  border-radius: 0px;
+}
+
+/* Контентная область */
+mat-sidenav-content {
+  padding: 16px;
+  background: #131313;
+  overflow-y: auto;
+}
+
+/* Пример легкой типографики */
+p {
+  margin: 0 0 12px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sidebar-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  height: 85vh;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sidebar-footer {
+    width: 100%;
+    height: 5vh;
+  display: flex;
+  justify-content: center;
+    padding-top: 15px;
+  gap: 80px;
+  align-items: center;
+  gap: 12px;
+
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.sidebar-footer .avatar {
+  width: 48px;
+  height: 48px;
+
+  background-color: #bbdefb;
+  color: #222;
+
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sidebar-footer .footer-info {
+  white-space: nowrap;
+  opacity: 0.9;
+}
