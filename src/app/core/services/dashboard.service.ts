@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Dashboard, DashboardTab } from '../../models/dashboard.model';
@@ -8,12 +8,8 @@ import { Dashboard, DashboardTab } from '../../models/dashboard.model';
   providedIn: 'root',
 })
 export class DashboardService {
-  private http: HttpClient;
+  private http: HttpClient = inject(HttpClient);
   private readonly url = '/data/mock-data.json';
-
-  constructor(http_c: HttpClient) {
-    this.http = http_c;
-  }
 
   getRaw(): Observable<Dashboard> {
     return this.http.get<Dashboard>(this.url);

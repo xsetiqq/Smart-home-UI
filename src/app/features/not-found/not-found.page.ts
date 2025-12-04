@@ -6,6 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './not-found.page.html',
-  styleUrls: ['./not-found.page.scss'],
+  styleUrl: './not-found.page.scss',
 })
 export class NotFoundPage {}

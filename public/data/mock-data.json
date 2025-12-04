@@ -188,6 +188,77 @@
           ]
         }
       ]
+    },
+    {
+      "id": "Prices",
+      "title": "Prices",
+      "cards": [
+        {
+          "id": "kitchen-light",
+          "title": "Kitchen",
+          "layout": "singleDevice",
+          "items": [
+            {
+              "type": "device",
+              "icon": "lightbulb",
+              "label": "Ceiling Light",
+              "state": true
+            }
+          ]
+        },
+        {
+          "id": "corridor-light",
+          "title": "Corridor",
+          "layout": "singleDevice",
+          "items": [
+            {
+              "type": "device",
+              "icon": "lightbulb",
+              "label": "Ceiling Light",
+              "state": false
+            }
+          ]
+        },
+        {
+          "id": "living-room-light",
+          "title": "Living Room",
+          "layout": "singleDevice",
+          "items": [
+            {
+              "type": "device",
+              "icon": "lightbulb",
+              "label": "Chandelier",
+              "state": true
+            }
+          ]
+        },
+        {
+          "id": "bedroom-light",
+          "title": "Bedroom",
+          "layout": "singleDevice",
+          "items": [
+            {
+              "type": "device",
+              "icon": "lightbulb",
+              "label": "Main Light",
+              "state": true
+            }
+          ]
+        },
+        {
+          "id": "bathroom-light",
+          "title": "Bathroom",
+          "layout": "singleDevice",
+          "items": [
+            {
+              "type": "device",
+              "icon": "lightbulb",
+              "label": "Ceiling Light",
+              "state": false
+            }
+          ]
+        }
+      ]
     }
   ]
 }
