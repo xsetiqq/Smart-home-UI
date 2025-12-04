@@ -1,16 +1,15 @@
-
-<mat-tab-group animationDuration="700ms" dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start" class="stretched-tabs">
-
-
+<mat-tab-group
+  animationDuration="0ms"
+  mat-stretch-tabs="false"
+  mat-align-tabs="center"
+  class="stretched-tabs"
+>
   @for (tab of tabs$ | async; track tab) {
-    <mat-tab>
-      
-      <ng-template mat-tab-label>{{tab.title}}</ng-template>
-     
-      @for (item of tab.cards; track item.id) {
-          <ng-container> <p>{{item.title}}</p></ng-container>
-      }
-          
-    </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>{{ tab.title }}</ng-template>
+    <div class="list-container">
+      <app-card-list [cards]="tab.cards"></app-card-list>
+    </div>
+  </mat-tab>
   }
 </mat-tab-group>

@@ -195,13 +195,13 @@
       "cards": [
         {
           "id": "kitchen-light",
-          "title": "Kitchen",
+          "title": "Kitchencard-list",
           "layout": "singleDevice",
           "items": [
             {
               "type": "device",
               "icon": "lightbulb",
-              "label": "Ceiling Light",
+              "label": "Ceiling Lightcard-list",
               "state": true
             }
           ]
@@ -214,7 +214,7 @@
             {
               "type": "device",
               "icon": "lightbulb",
-              "label": "Ceiling Light",
+              "label": "Ceiling Lightcard-list",
               "state": false
             }
           ]
