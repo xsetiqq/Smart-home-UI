@@ -1,7 +1,7 @@
-
-<div  class="card-list">
- <div *ngFor="let c of cards">
-    {{ c.title }}
+<div class="card-list">
+  @for (card of cards; track card.id) {
+  <div class="card-item">
+    <app-card [card]="card"></app-card>
   </div>
+  }
 </div>
- 
