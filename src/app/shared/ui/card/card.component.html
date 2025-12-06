@@ -1,10 +1,59 @@
-<div class="card">
+<div class="card" [appHighlightActive]="groupToggleState">
   <div class="card-head">
-    <h3>{{ card.title }}</h3>
+    <h2>{{ card.title }}</h2>
+    @if (showGroupToggle) {
+    <mat-slide-toggle [checked]="groupToggleState"></mat-slide-toggle>
+    }
   </div>
 
-  <div class="card-body">
-    @if (card.items.length) {<p >{{ card.items.length }} items</p>}
-    @else { <p>No items</p> }
+  <div
+    class="card-body"
+    [ngClass]="{
+      'horizontal-layout': card.layout === 'horizontalLayout',
+      'vertical-layout': card.layout === 'verticalLayout',
+      'single-device-layout': card.layout === 'singleDevice'
+    }"
+  >
+    @if (card.items.length) { @for (item of card.items; track $index) { @if (isSensor(item)) { @if
+    (card.layout === 'verticalLayout') {
+    <div class="vertical-card-item">
+      <div class="icon-label-group">
+        <mat-icon class="icon">{{ item.icon }}</mat-icon>
+        <p>{{ item.label }}</p>
+      </div>
+      <p>{{ item.value | sensorValue }}</p>
+    </div>
+
+    } @else if (card.layout === 'horizontalLayout') {
+    <div class="horizontal-card-item">
+      <p>{{ item.label }}</p>
+      <mat-icon class="icon">{{ item.icon }}</mat-icon>
+      <p>{{ item.value | sensorValue }}</p>
+    </div>
+
+    }@else if (card.layout === 'singleDevice') {
+    <div class="vertical-card-item">
+      <div class="icon-label-group">
+        <mat-icon class="icon">{{ item.icon }}</mat-icon>
+        <p>{{ item.label }}</p>
+      </div>
+      <p>{{ item.value | sensorValue }}</p>
+    </div>
+    }} @else if (isDevice(item)) {
+
+    <div class="vertical-card-item">
+      <div class="icon-label-group">
+        <mat-icon class="icon" [ngClass]="{ 'device-on': isDevice(item) && item.state }">{{
+          item.icon
+        }}</mat-icon>
+        <p>{{ item.label }}</p>
+      </div>
+
+      <mat-slide-toggle [(ngModel)]="item.state"></mat-slide-toggle>
+    </div>
+
+    } } } @else {
+    <p>No items</p>
+    }
   </div>
 </div>

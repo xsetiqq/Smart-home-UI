@@ -79,6 +79,7 @@
             }
           ]
         },
+        
         {
           "id": "living-room-mixed",
           "title": "Living Room",
@@ -125,14 +126,20 @@
         {
           "id": "kitchen-light",
           "title": "Kitchen",
-          "layout": "singleDevice",
+          "layout": "verticalLayout",
           "items": [
             {
               "type": "device",
               "icon": "lightbulb",
               "label": "Ceiling Light",
               "state": true
-            }
+            },
+             {
+               "type": "device",
+               "icon": "lightbulb",
+               "label": "LED",
+               "state": true
+             }
           ]
         },
         {

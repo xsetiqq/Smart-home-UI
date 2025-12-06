@@ -1,7 +1,7 @@
 import type { DeviceItem } from './device.model';
 import type { SensorItem } from './sensor.model';
 
-export type CardItem = DeviceItem | SensorItem;
+export type CardItem = SensorItem | DeviceItem;
 
 export type CardLayout = 'singleDevice' | 'horizontalLayout' | 'verticalLayout';
 

@@ -17,7 +17,7 @@
 .sidebar-header {
   width: auto;
   padding-top: 20px;
-  margin-left: 25px;
+  margin-left: 0px;
   padding-bottom: 8px;
   margin-bottom: 10px;
   text-align: center;
@@ -33,10 +33,9 @@
 
 mat-sidenav {
   width: 300px;
-
   background: #252525;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 1000;
+  height: 100%;
   border-radius: 0px;
 }
 
@@ -47,7 +46,6 @@ mat-sidenav-content {
 }
 
 mat-icon {
- 
   color: #dddddd;
 }
 
@@ -60,7 +58,7 @@ mat-icon {
   display: flex;
   flex-direction: column;
   gap: 1px;
-  height: 85vh;
+  height: calc(100% - 130px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -97,4 +95,18 @@ mat-icon {
 .sidebar-footer .footer-info {
   white-space: nowrap;
   opacity: 0.9;
+}
+
+.app-menu-btn {
+  display: none;
+}
+@media (max-width: 768px) {
+  .app-menu-btn {
+    display: block;
+  }
+  .sidebar-header {
+
+  margin-left: 0px;
+
+}
 }
