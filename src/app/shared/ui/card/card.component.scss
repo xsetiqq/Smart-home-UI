@@ -5,6 +5,12 @@
   border-radius: 12px;
   box-sizing: border-box;
   border: 1px solid #333;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.card--highlight {
+  box-shadow: 0 6px 18px rgba(255, 214, 66, 0.12);
+  border-color: #ffd642;
 }
 
 .card-body {
@@ -76,11 +82,4 @@
 .device-on {
   color: #ffd642;
 }
-.card {
-  transition: box-shadow 0.18s ease, border-color 0.18s ease;
-}
 
-.card--highlight {
-  box-shadow: 0 6px 18px rgba(255, 214, 66, 0.12);
-  border-color: #ffd642;
-}

@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { SidebarComponent } from "./shared/ui/sidebar/sidebar.component";
+import { HomePage } from "./features/home/home.page";
+
 
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    SidebarComponent
+    HomePage
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
