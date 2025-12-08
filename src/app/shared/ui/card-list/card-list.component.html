@@ -1,5 +1,5 @@
 <div class="card-list ">
-  @for (card of cards; track card.id) {
+  @for (card of cards; track $index) {
   <div class="card-item">
     <app-card [card]="card"></app-card>
   </div>

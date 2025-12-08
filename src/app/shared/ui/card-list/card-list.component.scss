@@ -1,11 +1,13 @@
 .card-list {
   padding: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  column-width: 390px; 
+  column-gap: 16px;
 }
 
 .card-item {
+  display: inline-block;
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: 16px;
+  break-inside: avoid;
 }

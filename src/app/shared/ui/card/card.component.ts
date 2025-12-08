@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card, CardItem } from '../../../models/card.model';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,7 @@ export class CardComponent {
     return item.type === 'sensor';
   }
   get deviceItems() {
-    return this.card.items.filter((i) => this.isDevice(i));
+    return this.card.items.filter((item) => this.isDevice(item));
   }
 
   get showGroupToggle(): boolean {
@@ -34,6 +34,6 @@ export class CardComponent {
   }
 
   get groupToggleState(): boolean {
-    return this.deviceItems.some((d) => d.state);
+    return this.deviceItems.some((device) => device.state);
   }
 }

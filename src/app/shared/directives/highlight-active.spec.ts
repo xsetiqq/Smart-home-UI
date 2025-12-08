@@ -1,8 +1,9 @@
-import { HighlightActive } from './highlight-active';
+import { HighlightActiveDirective } from "./highlight-active";
 
-describe('HighlightActive', () => {
+
+describe('HighlightActiveDirective', () => {
   it('should create an instance', () => {
-    const directive = new HighlightActive();
+    const directive = new HighlightActiveDirective();
     expect(directive).toBeTruthy();
   });
 });
