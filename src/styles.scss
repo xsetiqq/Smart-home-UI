@@ -15,6 +15,31 @@ html {
     typography: Roboto,
     density: 0,
   ));
+   @include mat.tabs-overrides((
+    container-height: 56px,
+    active-indicator-height: 3px,
+    active-indicator-color: #ffffff,
+    active-ripple-color: #ffffff,
+
+    active-label-text-color: #ffffff,
+    inactive-label-text-color: #979797,
+    inactive-hover-label-text-color: #cacaca,
+    inactive-focus-label-text-color: #ffffff,
+    active-focus-label-text-color: #ffffff,
+
+    active-hover-indicator-color: #ffffff,
+    active-focus-indicator-color: #ffffff,
+
+    divider-height: 0,
+    divider-color: transparent,
+
+    background-color: #ff0000,
+    foreground-color: #ff0000,
+
+    label-text-size: 14px,
+    label-text-weight: 500,
+  ));
+
 }
 
 body {
@@ -37,3 +62,19 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+p { 
+    color: #dddddd;
+  font-size: 0.95rem;
+   font-weight: 500;
+}
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: 500;
+    unicode-bidi: isolate;
+}

@@ -1,1 +1,7 @@
-<p>card-list works!</p>
+<div class="card-list">
+  @for (card of cards; track $index) {
+  <div class="card-item">
+    <app-card [card]="card" [tabId]="tabId"></app-card>
+  </div>
+  }
+</div>

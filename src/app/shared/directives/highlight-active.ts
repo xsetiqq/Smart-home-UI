@@ -1,10 +1,13 @@
-import { Directive } from '@angular/core';
+import { Directive, Input, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[appHighlightActive]'
+  selector: '[appHighlightActive]',
+  standalone: true,
 })
-export class HighlightActive {
+export class HighlightActiveDirective {
+@HostBinding('class.card--highlight') hostHighlight = false;
 
-  constructor() { }
-
+@Input('appHighlightActive') set highlightActive(value: boolean) {
+  this.hostHighlight = value;
+}
 }
