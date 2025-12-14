@@ -11,5 +11,4 @@ import { HomePage } from "./features/home/home.page";
   styleUrl: './app.component.scss',
 })
 export class App {
-  opened: boolean = true;
 }

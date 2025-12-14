@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card, CardItem } from '../../../models/card.model';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,16 +8,26 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { HighlightActiveDirective } from "../../directives/highlight-active";
 import { SensorValuePipe } from '../../pipes/sensor-value-pipe';
+import { DashboardService } from '../../../core/services/dashboard.service';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatSlideToggleModule, FormsModule, HighlightActiveDirective, SensorValuePipe],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    FormsModule,
+    HighlightActiveDirective,
+    SensorValuePipe,
+  ],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
   @Input() card!: Card;
+  dashboardService = inject(DashboardService);
+  @Input() tabId!: string;
 
   isDevice(item: CardItem): item is DeviceItem {
     return item.type === 'device';
@@ -35,5 +45,11 @@ export class CardComponent {
 
   get groupToggleState(): boolean {
     return this.deviceItems.some((device) => device.state);
+  }
+  onDeviceToggle(index: number, state: boolean): void {
+    this.dashboardService.toggleDevice(this.tabId, this.card.id, index, state);
+  }
+  onGroupToggle(state: boolean): void {
+    this.dashboardService.toggleCardDevices(this.tabId, this.card.id, state);
   }
 }

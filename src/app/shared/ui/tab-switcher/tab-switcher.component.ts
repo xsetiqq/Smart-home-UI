@@ -1,9 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../core/services/dashboard.service';
-import { DashboardTab } from '../../../models/dashboard.model';
 import { CardListComponent } from "../card-list/card-list.component";
 
 @Component({
@@ -15,5 +13,9 @@ import { CardListComponent } from "../card-list/card-list.component";
 /* eslint-disable @typescript-eslint/member-ordering */
 export class TabSwitcherComponent {
   private readonly dashboardService = inject(DashboardService);
-  public readonly tabs$: Observable<DashboardTab[]> = this.dashboardService.getTabs();
+  readonly tabs = computed(() => this.dashboardService.getTabs());
+
+  ngOnInit(): void {
+    this.dashboardService.loadDashboard();
+  }
 }

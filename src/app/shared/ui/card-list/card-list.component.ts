@@ -13,4 +13,5 @@ import { Card } from '../../../models/card.model';
 })
 export class CardListComponent {
   @Input() cards: Card[] = [];
+  @Input() tabId!: string;
 }
