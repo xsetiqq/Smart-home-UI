@@ -8,7 +8,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { HighlightActiveDirective } from "../../directives/highlight-active";
 import { SensorValuePipe } from '../../pipes/sensor-value-pipe';
-import { DashboardService } from '../../../core/services/dashboard.service';
+import { DashboardService } from '../../../features/dashboard/services/dashboard.service';
 
 @Component({
   selector: 'app-card',

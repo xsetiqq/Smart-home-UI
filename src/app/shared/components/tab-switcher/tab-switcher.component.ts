@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
-import { DashboardService } from '../../../core/services/dashboard.service';
+import { DashboardService } from '../../../features/dashboard/services/dashboard.service';
 import { CardListComponent } from "../card-list/card-list.component";
 
 @Component({
