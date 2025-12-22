@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SensorValue } from '../../models/sensor.model';
+import { SensorValue } from '../models/sensor.model';
 
 @Pipe({
   name: 'sensorValue',
