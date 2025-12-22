@@ -8,7 +8,7 @@ import { SidebarComponent } from '../../shared/components/sidebar/sidebar.compon
 
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet, MatSidenavModule, MatButtonModule, MatIconModule, SidebarComponent, SidebarComponent],
+  imports: [RouterOutlet, MatSidenavModule, MatButtonModule, MatIconModule, SidebarComponent],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })

@@ -33,9 +33,6 @@ html {
     divider-height: 0,
     divider-color: transparent,
 
-    background-color: #ff0000,
-    foreground-color: #ff0000,
-
     label-text-size: 14px,
     label-text-weight: 500,
   ));
@@ -61,7 +58,7 @@ body {
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 p { 
     color: #dddddd;
