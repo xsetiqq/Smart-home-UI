@@ -1,0 +1,34 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.menu-item {
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #bfc7d5;
+  border-radius: 3px;
+  font-size: 15px;
+  display: flex; 
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+}
+
+
+.menu-item.active {
+  background: rgba(0, 132, 255, 0.2);
+  color: #26d6f5;
+}
+
+
+.menu-item.active mat-icon {
+  color: #26d6f5;
+}
+
+
+.menu-item.active::before {
+  content: none;
+}
