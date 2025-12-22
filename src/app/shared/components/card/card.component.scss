@@ -74,6 +74,9 @@
   align-items: center;
   gap: 16px;
 }
+.icon-label-group.reverse-column {
+  flex-direction: column-reverse;
+}
 .icon {
   color: #4aa3ff;
   transition: color 0.2s ease;
@@ -82,4 +85,3 @@
 .device-on {
   color: #ffd642;
 }
-
