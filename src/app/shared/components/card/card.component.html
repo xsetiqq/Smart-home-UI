@@ -44,7 +44,12 @@
 
 <ng-template #itemTpl let-item="item" let-index="index" let-orientation="orientation">
   <div class="card-item" [ngClass]="orientation">
-    <div class="icon-label-group">
+    <div
+  class="icon-label-group"
+  [ngClass]="{
+    'reverse-column': orientation === 'horizontal'
+  }"
+>
       <mat-icon class="icon" [ngClass]="{ 'device-on': isDevice(item) && item.state }">
         {{ item.icon }}
       </mat-icon>
