@@ -37,8 +37,4 @@ export class TabSwitcherService {
   getTabs() {
     return this.dashboard()?.tabs ?? [];
   }
-
-  getTab(tabId: string) {
-    return this.getTabs().find((tab) => tab.id === tabId);
-  }
 }

@@ -27,8 +27,11 @@ import { CardService } from './services/card.service';
 })
 export class CardComponent {
   @Input() card!: Card;
-  cardService = inject(CardService);
   @Input() tabId!: string;
+  private cardService = inject(CardService);
+  get groupToggleState(): boolean {
+    return this.deviceItems.some((device) => device.state);
+  }
 
   isDevice(item: CardItem): item is DeviceItem {
     return item.type === 'device';
@@ -44,9 +47,6 @@ export class CardComponent {
     return this.deviceItems.length > 1;
   }
 
-  get groupToggleState(): boolean {
-    return this.deviceItems.some((device) => device.state);
-  }
   onDeviceToggle(index: number, state: boolean): void {
     this.cardService.toggleDevice(this.tabId, this.card.id, index, state);
   }
