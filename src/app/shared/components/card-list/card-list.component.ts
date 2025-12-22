@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
-import { Card } from '../../../models/card.model';
+import { Card } from '../../models/card.model';
 
 @Component({
   selector: 'app-card-list',

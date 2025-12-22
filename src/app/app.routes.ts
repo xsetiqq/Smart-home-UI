@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { DashboardPage } from './features/dashboard/dashboard.page';
-import { NotFoundPage } from './features/not-found/not-found.page';
 import { AboutPage } from './features/about/about.page';
+import { NotFoundPage } from './shared/not-found/not-found.page';
 
 
 export const routes: Route[] = [

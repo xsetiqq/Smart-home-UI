@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { TabSwitcherComponent } from "../../shared/ui/tab-switcher/tab-switcher.component";
+import { TabSwitcherComponent } from "../../shared/components/tab-switcher/tab-switcher.component";
+
 
 @Component({
   selector: 'app-dashboard',
