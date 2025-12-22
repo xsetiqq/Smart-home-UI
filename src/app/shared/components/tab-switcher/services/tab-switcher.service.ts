@@ -24,8 +24,9 @@ export class TabSwitcherService {
   }
 
   loadDashboard(): void {
-    this.http.get<Dashboard>(this.url).subscribe((data) => {
-      this._dashboard.set(data);
+    this.http.get<Dashboard>(this.url).subscribe({
+      next: (data) => this._dashboard.set(data),
+      error: (err) => console.error('Failed to load dashboard', err),
     });
   }
 
@@ -38,6 +39,6 @@ export class TabSwitcherService {
   }
 
   getTab(tabId: string) {
-    return this.getTabs().find((tabs) => tabs.id === tabId);
+    return this.getTabs().find((tab) => tab.id === tabId);
   }
 }
