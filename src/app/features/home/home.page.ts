@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,5 +13,18 @@ import { SidebarComponent } from '../../shared/components/sidebar/sidebar.compon
   styleUrl: './home.page.scss',
 })
 export class HomePage {
+  isMobile = false;
   opened: boolean = true;
+
+  ngOnInit() {
+    this.checkScreen();
+  }
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreen();
+  }
+
+  private checkScreen(): void {
+    this.isMobile = window.innerWidth <= 768;
+  }
 }

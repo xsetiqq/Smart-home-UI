@@ -3,7 +3,7 @@
 </button>
 
 <mat-sidenav-container class="container-mat-sidenav">
-  <mat-sidenav #sidenav [mode]="'side'" [(opened)]="opened">
+  <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile">
     <div class="sidebar-header"><h1>Smart Home UI</h1></div>
 
     <div class="sidebar-main">
