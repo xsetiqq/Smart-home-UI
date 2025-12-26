@@ -1,35 +1,35 @@
 @if (isAuthenticated()) {
-  <button
-    mat-icon-button
-    class="app-menu-btn"
-    (click)="toggleMenu()"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
+<button mat-icon-button class="app-menu-btn" (click)="toggleMenu()">
+  <mat-icon>menu</mat-icon>
+</button>
 }
 
 <mat-sidenav-container class="container-mat-sidenav">
   @if (isAuthenticated()) {
-    <mat-sidenav
-      [mode]="isMobile ? 'over' : 'side'"
-      [opened]="!isMobile"
-    >
-      <div class="sidebar-header">
-        <h1>Smart Home UI</h1>
-      </div>
+  <mat-sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile">
+    <div class="sidebar-header">
+      <h1>Smart Home UI</h1>
+    </div>
 
-      <div class="sidebar-main">
-        <app-sidebar />
-      </div>
+    <div class="sidebar-main">
+      <app-sidebar />
+    </div>
 
-      <div class="sidebar-footer">
-        <div class="avatar">RS</div>
-        <div class="footer-info">RS School. Angular</div>
-      </div>
-    </mat-sidenav>
+    <div class="sidebar-footer">
+      <div class="avatar">RS</div>
+      <div class="footer-info">RS School. Angular</div>
+    </div>
+  </mat-sidenav>
   }
 
   <mat-sidenav-content>
+    @if (authState() === undefined) {
+    <app-loading></app-loading>
+    } @if (authState() === true) {
+
     <router-outlet />
+    } @if (authState() === false) {
+    <router-outlet />
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

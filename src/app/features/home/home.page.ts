@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, HostListener, inject, computed, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
@@ -6,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 import { AuthService } from '../../auth/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { LoadingPage } from '../../shared/components/loading/dashboard.page';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     SidebarComponent,
     CommonModule,
+    LoadingPage,
   ],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
@@ -27,8 +30,10 @@ export class HomePage {
   @ViewChild(MatSidenav)
   sidenav?: MatSidenav;
   private readonly authService = inject(AuthService);
-
+  readonly authState = this.authService.isAuthenticated;
   ngOnInit() {
+    this.checkScreen();
+    this.authService.initAuth();
     this.checkScreen();
   }
 

@@ -16,12 +16,12 @@ export interface UserProfile {
   providedIn: 'root',
 })
 export class AuthService {
-  readonly isAuthenticated = signal<boolean>(false);
+  readonly isAuthenticated = signal<boolean | undefined>(undefined);
   readonly userProfile = signal<UserProfile | null>(null);
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly tokenService = inject(TokenService);
-  
+
   completeLogin(token: string): void {
     this.tokenService.setToken(token);
     this.initAuth();
@@ -35,10 +35,13 @@ export class AuthService {
       return;
     }
 
-    this.http.get<UserProfile>('/api/user/profile').subscribe({
+    this.http.get<UserProfile>('/user/profile').subscribe({
       next: (profile) => {
+        console.log(this.isAuthenticated());
         this.userProfile.set(profile);
         this.isAuthenticated.set(true);
+
+        this.router.navigate(['/dashboard']);
       },
       error: () => {
         this.logout();
@@ -47,7 +50,7 @@ export class AuthService {
   }
 
   login(userName: string, password: string) {
-    return this.http.post<LoginResponse>('/api/user/login', { userName, password });
+    return this.http.post<LoginResponse>('/user/login', { userName, password });
   }
 
   logout(): void {
