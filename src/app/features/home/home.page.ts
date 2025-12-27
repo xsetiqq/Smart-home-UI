@@ -25,7 +25,7 @@ import { LoadingPage } from '../../shared/components/loading/dashboard.page';
 })
 export class HomePage {
   readonly isAuthenticated = computed(() => this.authService.isAuthenticated());
-
+  readonly userProfile = computed(() => this.authService.userProfile());
   isMobile = false;
   @ViewChild(MatSidenav)
   sidenav?: MatSidenav;
@@ -35,6 +35,10 @@ export class HomePage {
     this.checkScreen();
     this.authService.initAuth();
     this.checkScreen();
+  }
+
+  handleLogout(): void {
+    this.authService.logout();
   }
 
   @HostListener('window:resize')

@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable, inject } from '@angular/core';
-
 import { TabSwitcherService } from '../../tab-switcher/services/tab-switcher.service';
+
+
 
 
 @Injectable({

@@ -9,19 +9,12 @@ import { Dashboard } from '../../../models/dashboard.model';
 })
 export class TabSwitcherService {
   private http = inject(HttpClient);
-  private readonly url = '/data/mock-data.json';
+  private readonly url = '/dashboards';
 
   private readonly _dashboard = signal<Dashboard | null>(null);
   readonly dashboard = this._dashboard.asReadonly();
 
-  constructor() {
-    effect(() => {
-      const dashboard = this._dashboard();
-      if (!dashboard) return;
 
-      console.log('Dashboard signal updated:', dashboard);
-    });
-  }
 
   loadDashboard(): void {
     this.http.get<Dashboard>(this.url).subscribe({

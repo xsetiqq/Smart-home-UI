@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators,  } from '@angu
 import { AuthService } from '../../../auth/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from "@angular/material/icon";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -15,8 +16,8 @@ import { MatIcon } from "@angular/material/icon";
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatIcon
-],
+    MatIcon,
+  ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
@@ -25,11 +26,11 @@ export class LoginFormComponent {
   public isLoading = false;
 
   public myForm = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    username: new FormControl('Warner', [Validators.required, Validators.minLength(1)]),
+    password: new FormControl('ea', [Validators.required, Validators.minLength(1)]),
   });
   private authService = inject(AuthService);
-
+  private router = inject(Router);
   public handleSubmit(): void {
     this.isLoading = true;
     if (this.myForm.invalid) {
@@ -43,6 +44,7 @@ export class LoginFormComponent {
       next: (res) => {
         this.isLoading = false;
         this.authService.completeLogin(res.token);
+        this.router.navigate(['/dashboard']);
       },
 
       error: (err) => {

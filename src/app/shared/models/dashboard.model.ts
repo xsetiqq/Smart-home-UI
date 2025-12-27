@@ -7,8 +7,14 @@ export interface DashboardTab {
 }
 
 export interface Dashboard {
-  id?: string;
-  title?: string;
-  icon?: string;
+  id: string;
+  title: string;
+  icon: string;
   tabs: DashboardTab[];
+}
+
+export interface DashboardNav {
+  id: string;
+  title: string;
+  icon: string;
 }

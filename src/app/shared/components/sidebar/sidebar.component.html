@@ -1,23 +1,15 @@
+@let dashboardsArray = dashboardsArrays();
+
 <div class="sidebar-inner">
+  @if (dashboardsArray?.length) {
   <nav class="menu">
-
-    <a 
-      routerLink="/dashboard"
-      routerLinkActive="active"
-    
-      class="menu-item"
-    >
-     <mat-icon>apps</mat-icon> Overview
+    @for (dashboard of dashboardsArray; track $index) {
+    <a routerLink="/dashboard/{{ dashboard.id }}" routerLinkActive="active" class="menu-item">
+      <mat-icon>{{ dashboard.icon }}</mat-icon> {{ dashboard.title }}
     </a>
+    }
 
-    <a 
-      routerLink="/about"
-      routerLinkActive="active"
     
-      class="menu-item"
-    >
-     <mat-icon>info</mat-icon> About
-    </a>
-
   </nav>
+  }
 </div>

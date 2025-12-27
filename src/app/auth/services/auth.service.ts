@@ -29,18 +29,18 @@ export class AuthService {
 
   initAuth(): void {
     const token = this.tokenService.getToken();
-
+   
     if (!token) {
       this.isAuthenticated.set(false);
-      return;
+    }
+    if (token) {
+      this.isAuthenticated.set(true);
     }
 
     this.http.get<UserProfile>('/user/profile').subscribe({
       next: (profile) => {
-        console.log(this.isAuthenticated());
         this.userProfile.set(profile);
         this.isAuthenticated.set(true);
-
         this.router.navigate(['/dashboard']);
       },
       error: () => {

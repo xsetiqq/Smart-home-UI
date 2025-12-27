@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CardListComponent } from "../card-list/card-list.component";
 import { TabSwitcherService } from './services/tab-switcher.service';
 
+
 @Component({
   selector: 'app-tab-switcher',
   imports: [MatTabsModule, CommonModule, CardListComponent],

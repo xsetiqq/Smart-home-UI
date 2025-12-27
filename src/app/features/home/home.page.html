@@ -16,8 +16,11 @@
     </div>
 
     <div class="sidebar-footer">
-      <div class="avatar">RS</div>
-      <div class="footer-info">RS School. Angular</div>
+      <div class="avatar">{{ userProfile()?.initials }}</div>
+      <div class="footer-info">{{ userProfile()?.fullName }}. Angular</div>
+      <button class="logout-button" (click)="handleLogout()">
+        <mat-icon>logout</mat-icon> 
+      </button>
     </div>
   </mat-sidenav>
   }

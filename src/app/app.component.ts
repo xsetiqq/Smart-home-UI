@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { HomePage } from "./features/home/home.page";
+import { RouterModule } from "@angular/router";
+import { AuthService } from './auth/services/auth.service';
 
 
 @Component({
   selector: 'app-root',
-  imports: [
-    HomePage
-],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class App {
+  constructor(auth: AuthService) {
+    auth.initAuth();
+  }
 }
