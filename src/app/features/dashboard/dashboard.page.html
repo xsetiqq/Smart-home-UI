@@ -1,2 +1,8 @@
-<app-tab-switcher></app-tab-switcher>
+
+@if (dashboardID) {
+ <app-tab-switcher [dashboardID]="dashboardID"></app-tab-switcher>
+} @else {
+    <p>No dashboard ID provided.</p>
+}
+
 

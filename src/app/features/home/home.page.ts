@@ -29,8 +29,10 @@ export class HomePage {
   isMobile = false;
   @ViewChild(MatSidenav)
   sidenav?: MatSidenav;
+  
   private readonly authService = inject(AuthService);
   readonly authState = this.authService.isAuthenticated;
+
   ngOnInit() {
     this.checkScreen();
     this.authService.initAuth();

@@ -22,7 +22,7 @@ export const routes: Route[] = [
             pathMatch: 'full',
           },
           {
-            path: ':id',
+            path: ':dashboardId',
             component: DashboardPage,
           },
         ],

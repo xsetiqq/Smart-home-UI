@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject, Input, signal } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 import { CardListComponent } from "../card-list/card-list.component";
@@ -14,9 +14,23 @@ import { TabSwitcherService } from './services/tab-switcher.service';
 /* eslint-disable @typescript-eslint/member-ordering */
 export class TabSwitcherComponent {
   private readonly tabSwitcherService = inject(TabSwitcherService);
-  readonly tabs = computed(() => this.tabSwitcherService.getTabs());
 
-  ngOnInit(): void {
-    this.tabSwitcherService.loadDashboard();
+  private dashboardId = signal<string | null>(null);
+
+  readonly tabs = this.tabSwitcherService.dashboard;
+
+  @Input()
+  set dashboardID(value: string) {
+    this.dashboardId.set(value);
+  }
+
+  constructor() {
+    effect(() => {
+      const id = this.dashboardId();
+
+      if (!id) return;
+
+      this.tabSwitcherService.loadDashboard(id);
+    });
   }
 }

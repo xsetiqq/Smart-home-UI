@@ -14,10 +14,8 @@ export class TabSwitcherService {
   private readonly _dashboard = signal<Dashboard | null>(null);
   readonly dashboard = this._dashboard.asReadonly();
 
-
-
-  loadDashboard(): void {
-    this.http.get<Dashboard>(this.url).subscribe({
+  loadDashboard(dashboardID: string): void {
+    this.http.get<Dashboard>(`${this.url}/${dashboardID}`).subscribe({
       next: (data) => this._dashboard.set(data),
       error: (err) => console.error('Failed to load dashboard', err),
     });

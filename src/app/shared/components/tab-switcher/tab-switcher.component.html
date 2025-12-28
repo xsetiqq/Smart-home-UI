@@ -4,7 +4,7 @@
   mat-align-tabs="center"
   class="stretched-tabs"
 >
-  @for (tab of tabs(); track $index) {
+  @for (tab of tabs()?.tabs; track tab.id) {
   <mat-tab>
     <ng-template mat-tab-label>{{ tab.title }}</ng-template>
     <div class="list-container">

@@ -10,7 +10,6 @@ import { HighlightActiveDirective } from "../../directives/highlight-active";
 import { SensorValuePipe } from '../../pipes/sensor-value-pipe';
 import { CardService } from './services/card.service';
 
-
 @Component({
   selector: 'app-card',
   standalone: true,

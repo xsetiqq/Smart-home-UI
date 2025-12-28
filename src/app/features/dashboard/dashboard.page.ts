@@ -10,12 +10,13 @@ import { ActivatedRoute, RouterModule } from "@angular/router";
   styleUrl: './dashboard.page.scss',
 })
 export class DashboardPage {
+  public dashboardID: string | null = null;
   private route = inject(ActivatedRoute);
-
+ 
   constructor() {
     this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
-      console.log('CURRENT DASHBOARD ID:', id);
+      const id = params.get('dashboardId');
+      this.dashboardID = id;
     });
   }
 }
