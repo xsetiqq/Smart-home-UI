@@ -2,6 +2,7 @@
 import { Injectable, effect, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Dashboard, DashboardNav } from '../../../models/dashboard.model';
+import { TabSwitcherService } from '../../tab-switcher/services/tab-switcher.service';
 
 
 @Injectable({
@@ -9,6 +10,8 @@ import { Dashboard, DashboardNav } from '../../../models/dashboard.model';
 })
 export class SidebarService {
   private http = inject(HttpClient);
+  private tabSwitcherService = inject(TabSwitcherService);
+
   private readonly url = '/dashboards';
 
   private readonly _dashboardsNavArray = signal<DashboardNav[] | null>(null);
@@ -16,7 +19,10 @@ export class SidebarService {
 
   loadDashboardsNavArray(): void {
     this.http.get<DashboardNav[]>(this.url).subscribe({
-      next: (data) => this._dashboardsNavArray.set(data),
+      next: (data) => {
+        this._dashboardsNavArray.set(data);
+        this.tabSwitcherService.loadDashboard(data[0].id);
+      },
       error: (err) => console.error('Failed to load dashboard', err),
     });
   }

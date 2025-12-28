@@ -5,6 +5,7 @@ import { NotFoundPage } from './shared/not-found/not-found.page';
 import { isAuthenticatedGuard } from './auth/guards/auth.guard';
 import { LoginPage } from './features/login/login.page';
 import { HomePage } from './features/home/home.page';
+import { DashboardRedirectComponent } from './features/dashboard/dashboard-layout.component';
 
 export const routes: Route[] = [
   {
@@ -15,11 +16,11 @@ export const routes: Route[] = [
       {
         path: 'dashboard',
         canActivate: [isAuthenticatedGuard],
+        
         children: [
           {
             path: '',
-            redirectTo: 'overview',
-            pathMatch: 'full',
+             component: DashboardRedirectComponent,
           },
           {
             path: ':dashboardId',
