@@ -5,6 +5,8 @@ import { isAuthenticatedGuard } from './auth/guards/auth.guard';
 import { LoginPage } from './features/login/login.page';
 import { HomePage } from './features/home/home.page';
 import { CardListComponent } from './shared/components/card-list/card-list.component';
+import { AuthService } from './auth/services/auth.service';
+import { inject } from '@angular/core';
 
 
 

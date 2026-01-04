@@ -5,10 +5,6 @@ import { HttpClient } from '@angular/common/http';
 
 export const isAuthenticatedGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
-  const router = inject(Router);
-  const http = inject(HttpClient);
-  
- 
 
   return auth.checkUserAuthentication();
 };

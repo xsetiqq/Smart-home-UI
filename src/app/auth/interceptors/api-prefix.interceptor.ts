@@ -1,15 +1,18 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+
 
 export const apiPrefixInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ) => {
-  if (req.url.startsWith('/')) {
-    const apiReq = req.clone({
-      url: `/api${req.url}`,
-    });
-    return next(apiReq);
+  if (req.url.startsWith('http')) {
+    return next(req);
   }
 
-  return next(req);
+ return next(
+   req.clone({
+     url: `${environment.smartHomeApiBaseUrl}/api${req.url}`,
+   })
+ );
 };
