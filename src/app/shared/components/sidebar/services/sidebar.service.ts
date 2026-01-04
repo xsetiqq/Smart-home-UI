@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Injectable, effect, inject, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Dashboard, DashboardNav } from '../../../models/dashboard.model';
-import { TabSwitcherService } from '../../tab-switcher/services/tab-switcher.service';
-
+import { DashboardNav } from '../../../models/dashboard.model';
 
 @Injectable({
   providedIn: 'root',

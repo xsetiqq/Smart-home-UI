@@ -25,7 +25,7 @@ export class LoginFormComponent {
   public errorMessage: string | null = null;
   public isLoading = false;
 
-  public myForm = new FormGroup({
+  public loginForm = new FormGroup({
     username: new FormControl('Warner', [Validators.required, Validators.minLength(1)]),
     password: new FormControl('ea', [Validators.required, Validators.minLength(1)]),
   });
@@ -33,12 +33,12 @@ export class LoginFormComponent {
   private router = inject(Router);
   public handleSubmit(): void {
     this.isLoading = true;
-    if (this.myForm.invalid) {
-      this.myForm.markAllAsTouched();
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 
-    const { username, password } = this.myForm.value;
+    const { username, password } = this.loginForm.value;
 
     this.authService.login(username!, password!).subscribe({
       next: (res) => {

@@ -1,7 +1,6 @@
-import { Component, computed, effect, inject, Input, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
-import { Card } from '../../models/card.model';
 import { TabSwitcherService } from '../tab-switcher/services/tab-switcher.service';
 import { ActivatedRoute } from '@angular/router';
 /* eslint-disable @typescript-eslint/member-ordering */

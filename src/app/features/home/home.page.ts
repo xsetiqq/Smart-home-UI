@@ -38,8 +38,6 @@ export class HomePage {
 
   ngOnInit() {
     this.checkScreen();
-
-    this.checkScreen();
   }
 
   handleLogout(): void {

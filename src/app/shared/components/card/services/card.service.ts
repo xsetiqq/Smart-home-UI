@@ -2,9 +2,6 @@
 import { Injectable, inject } from '@angular/core';
 import { TabSwitcherService } from '../../tab-switcher/services/tab-switcher.service';
 
-
-
-
 @Injectable({
   providedIn: 'root',
 })

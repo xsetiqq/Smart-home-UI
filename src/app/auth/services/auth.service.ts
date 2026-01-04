@@ -1,9 +1,9 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from './token.service';
 import { map } from 'rxjs/internal/operators/map';
-import { catchError, of, throwError } from 'rxjs';
+
 
 interface LoginResponse {
   token: string;
@@ -43,7 +43,7 @@ export class AuthService {
   }
   completeLogin(token: string): void {
     this.tokenService.setToken(token);
-    this.checkUserAuthentication();
+    this.checkUserAuthentication().subscribe();
   }
 
   login(userName: string, password: string) {

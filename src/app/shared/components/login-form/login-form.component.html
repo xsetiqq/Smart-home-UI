@@ -1,11 +1,11 @@
 <div class="form">
   <h1>Login</h1>
-  <form class="form-box" [formGroup]="myForm">
+  <form class="form-box" [formGroup]="loginForm">
     <mat-form-field>
       <mat-label>Enter Name</mat-label>
       <input matInput placeholder="Donald" formControlName="username" />
 
-      @if (!myForm.controls.username.valid && myForm.controls.username.touched) {
+      @if (!loginForm.controls.username.valid && loginForm.controls.username.touched) {
       <mat-error> Username is required </mat-error>
 
       }
@@ -18,12 +18,12 @@
         formControlName="password"
         type="password"
       />
-      @if (!myForm.controls.password.valid && myForm.controls.password.touched) {
+      @if (!loginForm.controls.password.valid && loginForm.controls.password.touched) {
       <mat-error> Password is required </mat-error>
       }
     </mat-form-field>
 
-    <button type="submit" matButton="filled" (click)="handleSubmit()" [disabled]="!myForm.valid">
+    <button type="submit" matButton="filled" (click)="handleSubmit()" [disabled]="!loginForm.valid">
       @if (isLoading) {
       <mat-spinner diameter="20"></mat-spinner>
       } @else { Login }
