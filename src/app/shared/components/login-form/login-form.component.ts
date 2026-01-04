@@ -44,7 +44,7 @@ export class LoginFormComponent {
       next: (res) => {
         this.isLoading = false;
         this.authService.completeLogin(res.token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
 
       error: (err) => {

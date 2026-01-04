@@ -1,15 +1,21 @@
-<mat-tab-group
+<nav
+  mat-tab-nav-bar
+  class="stretched-tabs"
   animationDuration="0ms"
   mat-stretch-tabs="false"
+    [tabPanel]="panel"
   mat-align-tabs="center"
-  class="stretched-tabs"
 >
-  @for (tab of tabs()?.tabs; track tab.id) {
-  <mat-tab>
-    <ng-template mat-tab-label>{{ tab.title }}</ng-template>
-    <div class="list-container">
-      <app-card-list [cards]="tab.cards" [tabId]="tab.id"></app-card-list>
-    </div>
-  </mat-tab>
+  @for (tab of dashboard()?.tabs; track tab.id) {
+  <a
+    mat-tab-link
+    [routerLink]="[tab.id]"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+  >
+    {{ tab.title }}
+  </a>
   }
-</mat-tab-group>
+</nav>
+<mat-tab-nav-panel #panel></mat-tab-nav-panel>

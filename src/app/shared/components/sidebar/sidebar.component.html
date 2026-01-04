@@ -1,15 +1,25 @@
 @let dashboardsArray = dashboardsArrays();
 
 <div class="sidebar-inner">
-  @if (dashboardsArray?.length) {
-  <nav class="menu">
-    @for (dashboard of dashboardsArray; track $index) {
-    <a routerLink="/dashboard/{{ dashboard.id }}" routerLinkActive="active" class="menu-item">
-      <mat-icon>{{ dashboard.icon }}</mat-icon> {{ dashboard.title }}
-    </a>
-    }
-  </nav>
+  @if (dashboardsArray === null) {
+    <p>Loading dashboards...</p>
+  } @else if (dashboardsArray.length === 0) {
+    <p class="empty">
+      You don’t have any dashboards yet.
+      They’ll appear here as soon as you create them.
+    </p>
   } @else {
-  <p>No menu items</p>
-}
+    <nav class="menu">
+      @for (dashboard of dashboardsArray; track dashboard.id) {
+        <a
+          [routerLink]="['/dashboard', dashboard.id]"
+          routerLinkActive="active"
+          class="menu-item"
+        >
+          <mat-icon>{{ dashboard.icon }}</mat-icon>
+          {{ dashboard.title }}
+        </a>
+      }
+    </nav>
+  }
 </div>

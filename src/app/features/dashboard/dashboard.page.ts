@@ -1,7 +1,7 @@
-import { Component, inject } from "@angular/core";
-import { TabSwitcherComponent } from "../../shared/components/tab-switcher/tab-switcher.component";
-import { ActivatedRoute, RouterModule } from "@angular/router";
-
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TabSwitcherComponent } from '../../shared/components/tab-switcher/tab-switcher.component';
+import { TabSwitcherService } from '../../shared/components/tab-switcher/services/tab-switcher.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +10,19 @@ import { ActivatedRoute, RouterModule } from "@angular/router";
   styleUrl: './dashboard.page.scss',
 })
 export class DashboardPage {
-  public dashboardID: string | null = null;
+  dashboardID = signal<string | null>(null);
   private route = inject(ActivatedRoute);
- 
+  private tabSwitcherService = inject(TabSwitcherService);
+
   constructor() {
     this.route.paramMap.subscribe((params) => {
-      const id = params.get('dashboardId');
-      this.dashboardID = id;
+      const dashboardId = params.get('dashboardId');
+      if (!dashboardId) return;
+
+      if (this.dashboardID() === dashboardId) return;
+
+      this.dashboardID.set(dashboardId);
+      this.tabSwitcherService.loadDashboard(dashboardId);
     });
   }
 }
-

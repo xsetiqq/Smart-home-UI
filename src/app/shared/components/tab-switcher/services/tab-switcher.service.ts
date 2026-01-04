@@ -10,6 +10,7 @@ import { Dashboard } from '../../../models/dashboard.model';
 export class TabSwitcherService {
   private http = inject(HttpClient);
   private readonly url = '/dashboards';
+  activeTabId = signal<string | null>(null);
 
   private readonly _dashboard = signal<Dashboard | null>(null);
   readonly dashboard = this._dashboard.asReadonly();
@@ -20,7 +21,9 @@ export class TabSwitcherService {
       error: (err) => console.error('Failed to load dashboard', err),
     });
   }
-
+  setActiveTab(id: string) {
+    this.activeTabId.set(id);
+  }
   updateDashboard(updater: (dashboard: Dashboard | null) => Dashboard | null): void {
     this._dashboard.update(updater);
   }

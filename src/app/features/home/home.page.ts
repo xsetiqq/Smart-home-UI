@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, HostListener, inject, computed, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, HostListener, inject, computed, ViewChild, effect } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,6 +8,7 @@ import { SidebarComponent } from '../../shared/components/sidebar/sidebar.compon
 import { AuthService } from '../../auth/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { LoadingPage } from '../../shared/components/loading/dashboard.page';
+import { SidebarService } from '../../shared/components/sidebar/services/sidebar.service';
 
 @Component({
   selector: 'app-home',
@@ -29,13 +30,15 @@ export class HomePage {
   isMobile = false;
   @ViewChild(MatSidenav)
   sidenav?: MatSidenav;
-  
+
+  private router = inject(Router);
+  private sidebarService = inject(SidebarService);
   private readonly authService = inject(AuthService);
   readonly authState = this.authService.isAuthenticated;
 
   ngOnInit() {
     this.checkScreen();
-    this.authService.initAuth();
+
     this.checkScreen();
   }
 
@@ -56,5 +59,19 @@ export class HomePage {
 
   private checkScreen(): void {
     this.isMobile = window.innerWidth <= 768;
+  }
+  constructor() {
+    this.sidebarService.loadDashboardsNavArray();
+
+    effect(() => {
+      const dashboards = this.sidebarService.getDashboardNavArray();
+
+      if (!dashboards.length) return;
+      if (this.router.url !== '/') return;
+
+      const firstDashboardId = dashboards[0].id;
+
+      this.router.navigate(['/dashboard', firstDashboardId]);
+    });
   }
 }

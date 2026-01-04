@@ -1,8 +1,5 @@
 
-@if (dashboardID) {
- <app-tab-switcher [dashboardID]="dashboardID"></app-tab-switcher>
-} @else {
-    <p>No dashboard ID provided.</p>
-}
+ <app-tab-switcher [dashboardID]="dashboardID()"></app-tab-switcher>
+  <router-outlet></router-outlet>
 
 

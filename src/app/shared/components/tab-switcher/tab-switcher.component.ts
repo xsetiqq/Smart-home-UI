@@ -1,36 +1,47 @@
-import { Component, computed, effect, inject, Input, signal } from '@angular/core';
+import { Component, effect, inject, Input } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
-import { CardListComponent } from "../card-list/card-list.component";
 import { TabSwitcherService } from './services/tab-switcher.service';
-
-
+/* eslint-disable @typescript-eslint/member-ordering */
 @Component({
   selector: 'app-tab-switcher',
-  imports: [MatTabsModule, CommonModule, CardListComponent],
+  imports: [MatTabsModule, CommonModule, RouterModule],
   templateUrl: './tab-switcher.component.html',
   styleUrl: './tab-switcher.component.scss',
 })
-/* eslint-disable @typescript-eslint/member-ordering */
 export class TabSwitcherComponent {
   private readonly tabSwitcherService = inject(TabSwitcherService);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
-  private dashboardId = signal<string | null>(null);
+  readonly dashboard = this.tabSwitcherService.dashboard;
 
-  readonly tabs = this.tabSwitcherService.dashboard;
-
-  @Input()
-  set dashboardID(value: string) {
-    this.dashboardId.set(value);
-  }
+  @Input() dashboardID: string | null = null;
 
   constructor() {
     effect(() => {
-      const id = this.dashboardId();
+      const dashboard = this.dashboard();
+      if (!dashboard) return;
 
-      if (!id) return;
+      const tabId = this.route.firstChild?.snapshot.paramMap.get('tabId');
 
-      this.tabSwitcherService.loadDashboard(id);
+      const firstTab = dashboard.tabs[0];
+      if (!firstTab) return;
+
+      if (!tabId) {
+        this.router.navigate([firstTab.id], { relativeTo: this.route });
+        return;
+      }
+
+      const validTab = dashboard.tabs.find((t) => t.id === tabId) ?? firstTab;
+
+      if (tabId !== validTab.id) {
+        this.router.navigate([validTab.id], { relativeTo: this.route });
+        return;
+      }
+
+      this.tabSwitcherService.setActiveTab(validTab.id);
     });
   }
 }

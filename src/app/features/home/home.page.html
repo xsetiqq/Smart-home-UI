@@ -26,13 +26,10 @@
   }
 
   <mat-sidenav-content>
-    @if (authState() === undefined) {
+      @if (authState() === undefined) {
     <app-loading></app-loading>
-    } @if (authState() === true) {
-
+  } @else {
     <router-outlet />
-    } @if (authState() === false) {
-    <router-outlet />
-    }
+  }
   </mat-sidenav-content>
 </mat-sidenav-container>

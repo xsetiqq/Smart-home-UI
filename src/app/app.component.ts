@@ -10,7 +10,5 @@ import { AuthService } from './auth/services/auth.service';
   styleUrl: './app.component.scss',
 })
 export class App {
-  constructor(auth: AuthService) {
-    auth.initAuth();
-  }
+ 
 }
