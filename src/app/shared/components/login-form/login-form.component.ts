@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule,  } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators,  } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../auth/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from "@angular/material/icon";

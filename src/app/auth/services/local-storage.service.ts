@@ -9,7 +9,7 @@ export class TokenService {
   clearToken(): void {
     localStorage.removeItem(TOKEN_KEY);
   }
-  
+
   getToken(): string | null {
     return localStorage.getItem(TOKEN_KEY);
   }

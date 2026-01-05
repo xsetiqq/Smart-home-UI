@@ -60,7 +60,6 @@ export class HomePage implements OnInit {
     this.isMobile = window.innerWidth <= 768;
   }
   constructor() {
-    this.sidebarService.loadDashboardsNavArray();
 
     effect(() => {
       const dashboards = this.sidebarService.getDashboardNavArray();

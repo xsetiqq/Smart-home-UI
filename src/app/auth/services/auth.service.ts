@@ -19,12 +19,12 @@ export interface UserProfile {
 })
 export class AuthService {
   readonly isAuthenticated = signal(false);
-
   readonly userProfile = signal<UserProfile | null>(null);
  
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly tokenService = inject(TokenService);
+  
   checkUserAuthentication() {
     return this.http.get<UserProfile>('/user/profile').pipe(
       map((data) => {
