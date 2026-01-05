@@ -35,6 +35,7 @@ export class LoginFormComponent {
     this.isLoading = true;
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
+      this.isLoading = false;
       return;
     }
 

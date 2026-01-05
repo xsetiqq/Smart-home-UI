@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { TokenService } from './token.service';
+import { TokenService } from './local-storage.service';
 import { map } from 'rxjs/internal/operators/map';
 
 

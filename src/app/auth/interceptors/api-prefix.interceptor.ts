@@ -6,10 +6,6 @@ export const apiPrefixInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ) => {
-  if (req.url.startsWith('http')) {
-    return next(req);
-  }
-
  return next(
    req.clone({
      url: `${environment.smartHomeApiBaseUrl}/api${req.url}`,

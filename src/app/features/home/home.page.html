@@ -26,7 +26,7 @@
   }
 
   <mat-sidenav-content>
-      @if (authState() === undefined) {
+      @if (isAuthenticated() === undefined) {
     <app-loading></app-loading>
   } @else {
     <router-outlet />

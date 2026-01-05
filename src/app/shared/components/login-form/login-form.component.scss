@@ -29,14 +29,17 @@ h1 {
   align-items: center;
 }
 button.mat-mdc-button-disabled {
-  background-color: #0e305e !important;
-  color: rgb(139, 139, 139) !important;
+  background-color: #0e305e;
+  color: rgb(139, 139, 139);
 }
 .auth-error {
-  color: red;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+.auth-error-placeholder {
+  height: 24px;
+  display: block;
 }

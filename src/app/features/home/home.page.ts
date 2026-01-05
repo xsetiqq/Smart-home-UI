@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, HostListener, inject, computed, ViewChild, effect } from '@angular/core';
+import { Component, HostListener, inject, computed, ViewChild, effect, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,8 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 import { AuthService } from '../../auth/services/auth.service';
 import { CommonModule } from '@angular/common';
-import { LoadingPage } from '../../shared/components/loading/dashboard.page';
+
 import { SidebarService } from '../../shared/components/sidebar/services/sidebar.service';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-home',
@@ -19,12 +20,12 @@ import { SidebarService } from '../../shared/components/sidebar/services/sidebar
     MatIconModule,
     SidebarComponent,
     CommonModule,
-    LoadingPage,
+    LoadingComponent,
   ],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })
-export class HomePage {
+export class HomePage implements OnInit {
   readonly isAuthenticated = computed(() => this.authService.isAuthenticated());
   readonly userProfile = computed(() => this.authService.userProfile());
   isMobile = false;
@@ -34,7 +35,7 @@ export class HomePage {
   private router = inject(Router);
   private sidebarService = inject(SidebarService);
   private readonly authService = inject(AuthService);
-  readonly authState = this.authService.isAuthenticated;
+
 
   ngOnInit() {
     this.checkScreen();
