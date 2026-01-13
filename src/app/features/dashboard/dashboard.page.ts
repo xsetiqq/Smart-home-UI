@@ -2,23 +2,27 @@ import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TabSwitcherComponent } from '../../shared/components/tab-switcher/tab-switcher.component';
 import { DashboardSignalStore } from './store/dashboard.signal-store';
+import { DevicesSignalStore } from '../devices/store/devices.signal-store';
 
 @Component({
   selector: 'app-dashboard',
   imports: [TabSwitcherComponent, RouterModule],
   templateUrl: './dashboard.page.html',
   styleUrl: './dashboard.page.scss',
-  providers: [DashboardSignalStore],
+  providers: [DashboardSignalStore, DevicesSignalStore],
 })
 export class DashboardPage implements OnInit {
   dashboardID = signal<string | null>(null);
   readonly dashboardStore = inject(DashboardSignalStore);
+  readonly devicesStore = inject(DevicesSignalStore);
   private route = inject(ActivatedRoute);
 
   constructor() {
     effect(() => {
       console.log('STORE TABS:', this.dashboardStore.tabs());
       console.log('LOADING:', this.dashboardStore.loading());
+      console.log('DEVICES LOADING:', this.devicesStore.loading());
+      console.log('DEVICES ENTITIES:', this.devicesStore.entities());
     });
   }
   ngOnInit(): void {
@@ -29,6 +33,7 @@ export class DashboardPage implements OnInit {
       if (this.dashboardID() === dashboardId) return;
 
       this.dashboardID.set(dashboardId);
+      this.devicesStore.loadDevices();
       this.dashboardStore.loadDashboard(dashboardId);
     });
   }
