@@ -5,7 +5,7 @@ export interface SensorValue {
 
 export interface SensorItem {
   type: 'sensor';
-  id?: string;
+  id: string;
   icon: string;
   label: string;
   value: SensorValue;

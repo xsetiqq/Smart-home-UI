@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
-import { TabSwitcherService } from '../tab-switcher/services/tab-switcher.service';
 import { ActivatedRoute } from '@angular/router';
+import { DashboardSignalStore } from '../../../features/dashboard/store/dashboard.signal-store';
 /* eslint-disable @typescript-eslint/member-ordering */
 @Component({
   selector: 'app-card-list',
@@ -14,9 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CardListComponent {
   private readonly route = inject(ActivatedRoute);
-  private readonly tabSwitcherService = inject(TabSwitcherService);
-
-  readonly dashboard = this.tabSwitcherService.dashboard;
+  private readonly dashboardStore = inject(DashboardSignalStore);
 
   readonly tabId = signal<string | null>(null);
 
@@ -27,11 +25,11 @@ export class CardListComponent {
   }
 
   readonly activeTab = computed(() => {
-    const dashboard = this.dashboard();
+    const tabs = this.dashboardStore.tabs();
     const tabId = this.tabId();
 
-    if (!dashboard || !tabId) return null;
+    if (!tabId || !tabs.length) return null;
 
-    return dashboard.tabs.find((t) => t.id === tabId) ?? null;
+    return tabs.find((t) => t.id === tabId) ?? null;
   });
 }

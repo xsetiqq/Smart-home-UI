@@ -6,7 +6,7 @@
     [tabPanel]="panel"
   mat-align-tabs="center"
 >
-  @for (tab of dashboard()?.tabs; track tab.id) {
+  @for (tab of tabs(); track tab.id) {
   <a
     mat-tab-link
     [routerLink]="[tab.id]"
