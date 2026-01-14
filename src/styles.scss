@@ -74,3 +74,18 @@ h2 {
     font-weight: 500;
     unicode-bidi: isolate;
 }
+
+
+.mat-mdc-tab-link,
+.mat-mdc-tab-link:hover,
+.mat-mdc-tab-link:focus,
+.mat-mdc-tab-link:active {
+  color: #fff !important;
+}
+
+
+
+
+.mat-mdc-tab-link .mdc-tab__text-label {
+  color: inherit !important;
+}

@@ -2,7 +2,7 @@
   @if (activeTab()) {
     @for (card of activeTab()!.cards; track card.id) {
       <div class="card-item">
-        <app-card [card]="card" [tabId]="activeTab()!.id" />
+        <app-card [card]="card" />
       </div>
     }
   }

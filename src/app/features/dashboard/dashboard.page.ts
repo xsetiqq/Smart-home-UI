@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TabSwitcherComponent } from '../../shared/components/tab-switcher/tab-switcher.component';
 import { DashboardSignalStore } from './store/dashboard.signal-store';
 import { DevicesSignalStore } from '../devices/store/devices.signal-store';
+import { DeviceItem } from '../../shared/models/device.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,10 +20,9 @@ export class DashboardPage implements OnInit {
 
   constructor() {
     effect(() => {
-      console.log('STORE TABS:', this.dashboardStore.tabs());
-      console.log('LOADING:', this.dashboardStore.loading());
-      console.log('DEVICES LOADING:', this.devicesStore.loading());
-      console.log('DEVICES ENTITIES:', this.devicesStore.entities());
+       console.log('EDIT MODE:', this.dashboardStore.isEditMode());
+       console.log('TABS:', this.dashboardStore.tabs());
+       console.log('SNAPSHOT:', this.dashboardStore.snapshotTabs());
     });
   }
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class DashboardPage implements OnInit {
 
       this.dashboardID.set(dashboardId);
       this.devicesStore.loadDevices();
-      this.dashboardStore.loadDashboard(dashboardId);
+      this.dashboardStore.loadDashboard(dashboardId);       
     });
   }
 }
