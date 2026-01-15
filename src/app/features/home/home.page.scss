@@ -102,3 +102,27 @@ mat-icon {
     margin-left: 0;
   }
 }
+.logout-button {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #f44336;
+  color: white;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.logout-button:active {
+  transform: scale(0.95);
+}

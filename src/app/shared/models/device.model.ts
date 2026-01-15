@@ -1,6 +1,6 @@
 export interface DeviceItem {
   type: 'device';
-  id?: string;
+  id: string;
   icon: string;
   label: string;
   state: boolean;

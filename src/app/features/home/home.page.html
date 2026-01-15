@@ -1,21 +1,35 @@
-<button mat-icon-button class="app-menu-btn" (click)="sidenav.toggle()">
+@if (isAuthenticated()) {
+<button mat-icon-button class="app-menu-btn" (click)="toggleMenu()">
   <mat-icon>menu</mat-icon>
 </button>
+}
 
 <mat-sidenav-container class="container-mat-sidenav">
-  <mat-sidenav #sidenav [mode]="'side'" [(opened)]="opened">
-    <div class="sidebar-header"><h1>Smart Home UI</h1></div>
+  @if (isAuthenticated()) {
+  <mat-sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile">
+    <div class="sidebar-header">
+      <h1>Smart Home UI</h1>
+    </div>
 
     <div class="sidebar-main">
-      <app-sidebar></app-sidebar>
+      <app-sidebar />
     </div>
+
     <div class="sidebar-footer">
-      <div class="avatar">RS</div>
-      <div class="footer-info">RS School. Angular</div>
+      <div class="avatar">{{ userProfile()?.initials }}</div>
+      <div class="footer-info">{{ userProfile()?.fullName }}. Angular</div>
+      <button class="logout-button" (click)="handleLogout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </div>
   </mat-sidenav>
+  }
 
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+      @if (isAuthenticated() === undefined) {
+    <app-loading></app-loading>
+  } @else {
+    <router-outlet />
+  }
   </mat-sidenav-content>
 </mat-sidenav-container>

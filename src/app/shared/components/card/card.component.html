@@ -42,7 +42,7 @@
   </div>
 </div>
 
-<ng-template #itemTpl let-item="item" let-index="index" let-orientation="orientation">
+<ng-template #itemTpl let-item="item" let-orientation="orientation">
   <div class="card-item" [ngClass]="orientation">
     <div
   class="icon-label-group"
@@ -50,7 +50,7 @@
     'reverse-column': orientation === 'horizontal'
   }"
 >
-      <mat-icon class="icon" [ngClass]="{ 'device-on': isDevice(item) && item.state }">
+      <mat-icon class="icon" [ngClass]="{ 'device-on': isDevice(item) && deviceStateById()(item.id) }">
         {{ item.icon }}
       </mat-icon>
       <p>{{ item.label }}</p>
@@ -59,7 +59,7 @@
     @if (isSensor(item)) {
     <p>{{ item.value | sensorValue }}</p>
     } @if (isDevice(item)) {
-    <mat-slide-toggle [checked]="item.state" (change)="onDeviceToggle(index, $event.checked)">
+    <mat-slide-toggle [checked]="deviceStateById()(item.id)" (change)="onDeviceToggle(item.id, $event.checked)">
     </mat-slide-toggle>
     }
   </div>

@@ -1,21 +1,48 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, effect, inject, Input } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
-import { CardListComponent } from "../card-list/card-list.component";
-import { TabSwitcherService } from './services/tab-switcher.service';
 
+import { DashboardSignalStore } from '../../../features/dashboard/store/dashboard.signal-store';
+/* eslint-disable @typescript-eslint/member-ordering */
 @Component({
   selector: 'app-tab-switcher',
-  imports: [MatTabsModule, CommonModule, CardListComponent],
+  imports: [MatTabsModule, CommonModule, RouterModule],
   templateUrl: './tab-switcher.component.html',
   styleUrl: './tab-switcher.component.scss',
 })
-/* eslint-disable @typescript-eslint/member-ordering */
 export class TabSwitcherComponent {
-  private readonly tabSwitcherService = inject(TabSwitcherService);
-  readonly tabs = computed(() => this.tabSwitcherService.getTabs());
+  private readonly dashboardStore = inject(DashboardSignalStore);
 
-  ngOnInit(): void {
-    this.tabSwitcherService.loadDashboard();
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+
+  readonly tabs = this.dashboardStore.tabs;
+
+  constructor() {
+    effect(() => {
+      const tabs = this.tabs();
+
+      if (!tabs.length) return;
+
+      const tabId = this.route.firstChild?.snapshot.paramMap.get('tabId');
+
+      const firstTab = tabs[0];
+      if (!firstTab) return;
+
+      if (!tabId) {
+        this.router.navigate([firstTab.id], { relativeTo: this.route });
+        return;
+      }
+
+      const validTab = tabs.find((t) => t.id === tabId) ?? firstTab;
+
+      if (tabId !== validTab.id) {
+        this.router.navigate([validTab.id], { relativeTo: this.route });
+        return;
+      }
+
+     
+    });
   }
 }
