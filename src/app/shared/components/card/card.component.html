@@ -1,7 +1,9 @@
 <div class="card" [appHighlightActive]="groupToggleState">
   <div class="card-head">
+    @if (card.title) {
     <h2>{{ card.title }}</h2>
-
+    } @else {
+    <h2>Untitled Card</h2>}
     @if (showGroupToggle) {
     <mat-slide-toggle [checked]="groupToggleState" (change)="onGroupToggle($event.checked)">
     </mat-slide-toggle>
@@ -37,7 +39,7 @@
       <p>{{ item.label }}</p>
     </div>
     } } } } @else {
-    <p>No items</p>
+    <p>Empty layout</p>
     }
   </div>
 </div>

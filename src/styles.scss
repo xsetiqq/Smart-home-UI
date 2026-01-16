@@ -89,3 +89,10 @@ h2 {
 .mat-mdc-tab-link .mdc-tab__text-label {
   color: inherit !important;
 }
+.transparent-dialog-container .mat-mdc-dialog-container,
+.transparent-dialog-container .mat-mdc-dialog-surface {
+  background: transparent !important; 
+  box-shadow: none !important;       
+  border: none !important;
+}
+

@@ -11,6 +11,7 @@
   mat-stretch-tabs="false"
   [tabPanel]="panel"
   mat-align-tabs="start"
+  
 >
   @if (!isEditMode()) { @for (tab of tabs(); track tab.id) {
   <a
@@ -33,42 +34,76 @@
     [active]="rla.isActive"
     draggable="false"
   >
-
-    @if (rla.isActive) {<button  (click)="moveTabLeft(tab.id)"
-  [class.disabled]="!isEditMode() || isFirstTab(tab.id)" class="icon-btn">
+    @if (rla.isActive) {<button
+      (click)="moveTabLeft(tab.id)"
+      [class.disabled]="!isEditMode() || isFirstTab(tab.id)"
+      class="icon-btn"
+    >
       <mat-icon>arrow_back</mat-icon></button
-    >} 
-    
-    @if (editingTabId === tab.id) {
+    >} @if (editingTabId === tab.id) {
     <div class="tab-title-input-wrapper">
+      <input
+        class="tab-title-input"
+        [value]="tab.title"
+        (keydown.enter)="onTabRename(tab.id, $event.target.value)"
+        (blur)="onTabRename(tab.id, $event.target.value)"
+      />
+
+      <button type="button" class="input-confirm-btn" (click)="onTabRename(tab.id, tab.title)">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button type="button" class="input-delete-btn" (click)="onDeleteTab(tab.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    } @else { <span>{{ tab.title }}</span> @if (rla.isActive) {
+    <button (click)="onTabEdit(tab.id)" class="icon-btn padding-none">
+      <mat-icon>edit</mat-icon></button
+    >} } @if (rla.isActive) {<button
+      (click)="moveTabRight(tab.id)"
+      [class.disabled]="!isEditMode() || isLastTab(tab.id)"
+      class="icon-btn"
+    >
+      <mat-icon>arrow_forward</mat-icon></button
+    >}
+  </a>
+
+  }} @if (isEditMode()) { @if (isInputOpen) {
+  <div class="tab-title-input-wrapper">
   <input
+    #tabInput
     class="tab-title-input"
-    [value]="tab.title"
-    (keydown.enter)="onTabRename(tab.id, $event.target.value)"
-    (blur)="onTabRename(tab.id, $event.target.value)"
+    value="New Tab"
+    minlength="3"
+    maxlength="50"
+    (keydown.enter)="onAddNewTab(tabInput.value)"
+    (blur)="onAddNewTab(tabInput.value)"
   />
 
   <button
     type="button"
     class="input-confirm-btn"
-    (click)="onTabRename(tab.id, tab.title)"
+    (click)="onAddNewTab(tabInput.value)"
   >
-    <mat-icon>save</mat-icon>
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button
+    type="button"
+    class="input-delete-btn"
+    (click)="onIsInputOpen(false)"
+  >
+    <mat-icon>close</mat-icon>
   </button>
 </div>
-    } @else { <span>{{ tab.title }}</span>
-    @if (rla.isActive) { <button (click)="onTabEdit(tab.id)" class="icon-btn padding-none">
-      <mat-icon>edit</mat-icon></button
-    >}
-   }
-    
-    @if (rla.isActive) {<button  (click)="moveTabRight(tab.id)"
-  [class.disabled]="!isEditMode() || isLastTab(tab.id)" class="icon-btn">
-      <mat-icon>arrow_forward</mat-icon></button
-    >}
-  </a>
-
-  }}
+  } @else {
+  <button (click)="onIsInputOpen(true)" class="icon-btn onIsInputOpen-btn">
+    <mat-icon>add</mat-icon>
+  </button>
+  } }
+    @if (!isEditMode() && tabs().length === 0) {
+    <p class="padding-none">There are no tabs. You can add new ones in edit mode. </p>
+  }
 
   <div class="tab-actions">
     @if (!isEditMode()) {

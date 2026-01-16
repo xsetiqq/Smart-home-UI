@@ -22,6 +22,8 @@ export class TabSwitcherComponent {
   readonly tabs = this.dashboardStore.tabs;
   readonly dashboardId = this.dashboardStore.dashboardId;
   public editingTabId: string | null = null;
+  public isInputOpen: boolean = false;
+
   onEdit() {
     this.dashboardStore.enterEditMode();
   }
@@ -38,14 +40,32 @@ export class TabSwitcherComponent {
     console.log('Надо модалку сделать с подтверждением');
     // this.dashboardStore.deleteCurrentDashboard();
   }
-  
+
   onTabRename(tabId: string, newTitle: string) {
     this.dashboardStore.renameTab(tabId, newTitle);
     this.editingTabId = null;
   }
 
+  onDeleteTab(tabId: string) {
+    this.dashboardStore.removeTab(tabId);
+    this.editingTabId = null;
+  }
+
   onTabEdit(tabId: string) {
     this.editingTabId = tabId;
+  }
+
+  onIsInputOpen(isOpen: boolean) {
+    this.isInputOpen = isOpen;
+  }
+  onAddNewTab(raw: string) {
+    if (!raw) return;
+
+    const value = raw.trim();
+
+    if (value.length < 3 || value.length > 50) return;
+    this.dashboardStore.addTab(value);
+    this.onIsInputOpen(false);
   }
 
   moveTabLeft(tabId: string) {
@@ -55,6 +75,7 @@ export class TabSwitcherComponent {
   moveTabRight(tabId: string) {
     this.dashboardStore.reorderTab(tabId, 'right');
   }
+  
   isFirstTab(tabId: string): boolean {
     return this.tabs()[0]?.id === tabId;
   }
