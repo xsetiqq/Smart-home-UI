@@ -1,4 +1,4 @@
 
 export const environment = {
-  smartHomeApiBaseUrl: 'http://localhost:3004',
+  smartHomeApiBaseUrl: 'https://smart-home-json-server-h9uz.onrender.com',
 };
