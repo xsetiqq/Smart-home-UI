@@ -1,0 +1,62 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2>Entities card configuration</h2>
+    <button class="icon-btn" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content">
+    
+    <div class="input-group">
+      <label>Title (optional)</label>
+      <input 
+        type="text" 
+        [ngModel]="title()" 
+        (ngModelChange)="title.set($event)"
+        placeholder="e.g. Bedroom">
+    </div>
+
+    <h3>Entities</h3>
+
+    <div class="items-list">
+      @for (item of items(); track $index) {
+        <div class="list-item">
+          <div class="item-info">
+            <mat-icon>{{ item.icon || 'devices' }}</mat-icon>
+            <span>{{ item.label }}</span>
+          </div>
+          
+          <button mat-icon-button (click)="removeItem($index)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+
+    <div class="add-select-container">
+        <mat-form-field appearance="fill" subscriptSizing="dynamic">
+            <mat-label>Select an entity</mat-label>
+            
+            <mat-select 
+                [(value)]="selectedDeviceId" 
+                (selectionChange)="addItem($event.value)"
+                panelClass="dark-panel">
+                
+                @for (device of availableDevices(); track device.id) {
+                    <mat-option [value]="device.id">
+                        <mat-icon>{{ device.icon }}</mat-icon>
+                        {{ device.label }}
+                    </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-button mat-dialog-close>CANCEL</button>
+    <button mat-button color="primary" (click)="save()">SAVE</button>
+  </div>
+</div>

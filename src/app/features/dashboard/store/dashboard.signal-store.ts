@@ -5,6 +5,7 @@ import { patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { DeviceItem } from '../../../shared/models/device.model';
 import { SensorItem } from '../../../shared/models/sensor.model';
+import { CardItem } from '../../../shared/models/card.model';
 
 function toKebabCase(value: string): string {
   return value
@@ -251,6 +252,31 @@ export const DashboardSignalStore = signalStore(
         tabs: nextTabs,
       });
     },
+    updateCard(tabId: string, cardId: string, changes: { title?: string; items?: CardItem[] }) {
+      if (!store.isEditMode()) return;
+
+      const tabs = store.tabs();
+      const tabIndex = tabs.findIndex((tab) => tab.id === tabId); 
+      if (tabIndex === -1) return;
+
+      const tab = tabs[tabIndex];
+      const cardIndex = tab.cards.findIndex((card) => card.id === cardId); 
+      if (cardIndex === -1) return;
+
+  
+      const updatedCard = {
+        ...tab.cards[cardIndex],
+        ...changes,
+      };
+
+      const nextCards = [...tab.cards];
+      nextCards[cardIndex] = updatedCard;
+
+      const nextTabs = [...tabs];
+      nextTabs[tabIndex] = { ...tab, cards: nextCards };
+
+      patchState(store, { tabs: nextTabs });
+    },
     addItemToCard(tabId: string, cardId: string, item: DeviceItem | SensorItem) {
       if (!store.isEditMode()) return;
 
@@ -333,5 +359,5 @@ export const DashboardSignalStore = signalStore(
         },
       });
     },
-  }))
+  })),
 );

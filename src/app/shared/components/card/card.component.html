@@ -1,12 +1,13 @@
 <div class="card" [appHighlightActive]="groupToggleState">
   <div class="card-head">
     @if (card.title) {
-    <h2>{{ card.title }}</h2>
+      <h2>{{ card.title }}</h2>
     } @else {
-    <h2>Untitled Card</h2>}
+      <h2>Untitled Card</h2>
+    }
     @if (showGroupToggle) {
-    <mat-slide-toggle [checked]="groupToggleState" (change)="onGroupToggle($event.checked)">
-    </mat-slide-toggle>
+      <mat-slide-toggle [checked]="groupToggleState" (change)="onGroupToggle($event.checked)">
+      </mat-slide-toggle>
     }
   </div>
 
@@ -15,54 +16,109 @@
     [ngClass]="{
       'horizontal-layout': card.layout === 'horizontalLayout',
       'vertical-layout': card.layout === 'verticalLayout',
-      'single-device-layout': card.layout === 'singleDevice'
+      'single-device-layout': card.layout === 'singleDevice',
     }"
   >
-    @if (card.items.length) { @switch (card.layout) { @case ('horizontalLayout') { @for (item of
-    card.items; track $index) {
-    <ng-container
-      *ngTemplateOutlet="itemTpl; context: { item, index: $index, orientation: 'horizontal' }"
-    >
-    </ng-container>
-    } } @case ('verticalLayout') { @for (item of card.items; track $index) {
-    <ng-container
-      *ngTemplateOutlet="itemTpl; context: { item, index: $index, orientation: 'vertical' }"
-    >
-    </ng-container>
-    } } @case ('singleDevice') { @for (item of card.items; track $index) {
-    <ng-container
-      *ngTemplateOutlet="itemTpl; context: { item, index: $index, orientation: 'vertical' }"
-    >
-    </ng-container>
-    } } @default { @for (item of card.items; track $index) {
-    <div class="card-item vertical">
-      <p>{{ item.label }}</p>
-    </div>
-    } } } } @else {
-    <p>Empty layout</p>
+    @if (card.items.length) {
+      @switch (card.layout) {
+        @case ('horizontalLayout') {
+          @for (item of card.items; track $index) {
+            <ng-container
+              *ngTemplateOutlet="
+                itemTpl;
+                context: { item, index: $index, orientation: 'horizontal' }
+              "
+            >
+            </ng-container>
+          }
+        }
+        @case ('verticalLayout') {
+          @for (item of card.items; track $index) {
+            <ng-container
+              *ngTemplateOutlet="itemTpl; context: { item, index: $index, orientation: 'vertical' }"
+            >
+            </ng-container>
+          }
+        }
+        @case ('singleDevice') {
+          @for (item of card.items; track $index) {
+            <ng-container
+              *ngTemplateOutlet="itemTpl; context: { item, index: $index, orientation: 'vertical' }"
+            >
+            </ng-container>
+          }
+        }
+        @default {
+          @for (item of card.items; track $index) {
+            <div class="card-item vertical">
+              <p>{{ item.label }}</p>
+            </div>
+          }
+        }
+      }
+    } @else {
+      <p>Empty layout</p>
     }
   </div>
+
+  @if (isEditMode()) {
+    <div class="edit-panel">
+      <button (click)="onEdit()" mat-button>EDIT</button>
+     <div class="controls">
+      <button 
+        class="icon-btn" 
+        (click)="onMove(1)" 
+        [disabled]="index >= totalCards - 1">
+        <mat-icon class="icon">add</mat-icon>
+      </button>
+
+      <div class="circle">
+        {{ index + 1 }}
+      </div>
+
+      <button 
+        class="icon-btn" 
+        (click)="onMove(-1)" 
+        [disabled]="index === 0">
+        <mat-icon class="icon">remove</mat-icon>
+      </button>
+
+      <div class="delete">
+        <button (click)="onDeleteCard()" class="icon-btn">
+          <mat-icon class="icon">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    </div>
+  }
 </div>
 
 <ng-template #itemTpl let-item="item" let-orientation="orientation">
   <div class="card-item" [ngClass]="orientation">
     <div
-  class="icon-label-group"
-  [ngClass]="{
-    'reverse-column': orientation === 'horizontal'
-  }"
->
-      <mat-icon class="icon" [ngClass]="{ 'device-on': isDevice(item) && deviceStateById()(item.id) }">
+      class="icon-label-group"
+      [ngClass]="{
+        'reverse-column': orientation === 'horizontal',
+      }"
+    >
+      <mat-icon
+        class="icon"
+        [ngClass]="{ 'device-on': isDevice(item) && deviceStateById()(item.id) }"
+      >
         {{ item.icon }}
       </mat-icon>
       <p>{{ item.label }}</p>
     </div>
 
     @if (isSensor(item)) {
-    <p>{{ item.value | sensorValue }}</p>
-    } @if (isDevice(item)) {
-    <mat-slide-toggle [checked]="deviceStateById()(item.id)" (change)="onDeviceToggle(item.id, $event.checked)">
-    </mat-slide-toggle>
+      <p>{{ item.value | sensorValue }}</p>
+    }
+    @if (isDevice(item)) {
+      <mat-slide-toggle
+        [checked]="deviceStateById()(item.id)"
+        (change)="onDeviceToggle(item.id, $event.checked)"
+      >
+      </mat-slide-toggle>
     }
   </div>
 </ng-template>

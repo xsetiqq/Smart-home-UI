@@ -21,7 +21,7 @@ export class DashboardPage implements OnInit {
   constructor() {
     effect(() => {
       //  console.log('EDIT MODE:', this.dashboardStore.isEditMode());
-      //  console.log('TABS:', this.dashboardStore.tabs());
+       console.log('TABS:', this.dashboardStore.tabs());
       //  console.log('SNAPSHOT:', this.dashboardStore.snapshotTabs());
     });
   }

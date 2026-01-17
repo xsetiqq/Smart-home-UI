@@ -1,8 +1,9 @@
 <div class="card-list">
   @if (activeTab()) {
-    @for (card of activeTab()!.cards; track card.id) {
+    @for (card of activeTab()!.cards; track card.id; let i = $index) {
       <div class="card-item">
-        <app-card [card]="card" />
+  
+        <app-card [card]="card" [index]="i" [tabId]="activeTab()!.id" [totalCards]="activeTab()!.cards.length" />
       </div>
     }
   }

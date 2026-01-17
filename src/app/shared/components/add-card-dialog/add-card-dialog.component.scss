@@ -22,7 +22,7 @@
   }
 }
 
-/* Сетка для вариантов макетов */
+
 .layout-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -30,7 +30,7 @@
   padding: 24px;
 }
 
-/* Карточка выбора (обертка) */
+
 .layout-option {
   display: flex;
   flex-direction: column;
@@ -52,26 +52,26 @@
     transform: translateY(-2px);
     
     .preview-card {
-        border-color: #666; /* Подсветка бордера при наведении */
+        border-color: #666; 
     }
   }
 }
 
-/* Визуальная "превьюшка" карточки */
+
 .preview-card {
   width: 100%;
-  background: #121212; /* Очень темный фон для превью */
+  background: #121212; 
   border: 1px solid #333;
   border-radius: 12px;
   padding: 16px;
   box-sizing: border-box;
-  min-height: 140px; /* Фиксированная высота для ровности */
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* -- Стили для Vertical Layout (Entities) -- */
+
 .preview-card.vertical {
   justify-content: flex-start;
   gap: 12px;
