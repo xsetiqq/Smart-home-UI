@@ -13,25 +13,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddCardBtnComponent {
   private readonly dashboardStore = inject(DashboardSignalStore);
-  public dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
   readonly isEditMode = this.dashboardStore.isEditMode;
   readonly tabId = signal<string | null>(null);
   private readonly route = inject(ActivatedRoute);
 
   openDialog() {
     const dialogRef = this.dialog.open(AddCardDialogComponent, {
-      data: { tabId: this.tabId() },
       width: '100%',
       maxWidth: '900px',
       panelClass: 'transparent-dialog-container',
     });
 
     dialogRef.afterClosed().subscribe((layout) => {
-
       const currentTabId = this.tabId();
-
       if (layout && currentTabId) {
-    
         this.dashboardStore.addCard(currentTabId, layout);
       }
     });

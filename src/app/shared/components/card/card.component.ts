@@ -71,16 +71,20 @@ export class CardComponent {
 
     });
 
-    dialogRef
-      .afterClosed()
-      .subscribe((result: { title: string; items: CardItem[] } | undefined) => {
-        if (result) {
-          this.dashboardStore.updateCard(this.tabId, this.card.id, {
-            title: result.title,
-            items: result.items,
-          });
+    dialogRef.afterClosed().subscribe({
+      next: (result: { title: string; items: CardItem[] } | undefined) => {
+        if (!result) {
+          return;
         }
-      });
+        this.dashboardStore.updateCard(this.tabId, this.card.id, {
+          title: result.title,
+          items: result.items,
+        });
+      },
+      error: (error: unknown) => {
+        console.error('EditCardDialogComponent afterClosed error:', error);
+      },
+    });
   }
 
   get groupToggleState(): boolean {

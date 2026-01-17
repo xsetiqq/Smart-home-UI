@@ -12,15 +12,15 @@ interface DevicesStoreState {
 }
 
 export const DevicesSignalStore = signalStore(
-  { providedIn: 'root' }, // Желательно добавить providedIn: 'root', чтобы стор был глобальным
+  { providedIn: 'root' }, 
   withState<DevicesStoreState>({
     entities: {},
     loading: false,
   }),
 
-  // ДОБАВЛЯЕМ ЭТУ ЧАСТЬ
+
   withComputed((store) => ({
-    // Преобразуем объект entities { "1": {...}, "2": {...} } в массив [{...}, {...}]
+  
     allDevices: computed(() => Object.values(store.entities())),
   })),
 
@@ -47,7 +47,7 @@ export const DevicesSignalStore = signalStore(
     },
 
     toggleDeviceState(deviceId: string, newState: boolean) {
-      // ... ваш код toggleDeviceState (оставляем без изменений) ...
+
       const current = store.entities()[deviceId];
       if (!current || current.type !== 'device') return;
       const prevState = current.state;

@@ -27,12 +27,12 @@ import { DevicesSignalStore } from '../../../features/devices/store/devices.sign
 })
 export class EditCardDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<EditCardDialogComponent>);
-  private readonly data = inject<{ card: Card }>(MAT_DIALOG_DATA);
-
+  private readonly data = inject<{ card: Card } | null>(MAT_DIALOG_DATA, { optional: true });
+  private readonly initialCard: Card | null = this.data?.card ?? null;
   private readonly devicesStore = inject(DevicesSignalStore);
   public selectedDeviceId = signal<string | null>(null);
-  readonly title = signal<string>(this.data.card.title || '');
-  readonly items = signal<CardItem[]>([...this.data.card.items]);
+  readonly title = signal<string>(this.initialCard?.title ?? '');
+  readonly items = signal<CardItem[]>([...(this.initialCard?.items ?? [])]);
   readonly availableDevices = this.devicesStore.allDevices;
 
   removeItem(indexToRemove: number): void {
@@ -40,15 +40,15 @@ export class EditCardDialogComponent {
   }
 
   addItem(deviceId: string): void {
-   const foundDevice = this.availableDevices().find((d) => d.id === deviceId);
+    const foundDevice = this.availableDevices().find((d) => d.id === deviceId);
 
-   if (foundDevice) {
-     this.items.update((current) => [...current, foundDevice]);
+    if (foundDevice) {
+      this.items.update((current) => [...current, foundDevice]);
 
-     setTimeout(() => {
-       this.selectedDeviceId.set(null);
-     });
-   }
+      setTimeout(() => {
+        this.selectedDeviceId.set(null);
+      }, 0);
+    }
   }
 
   save(): void {

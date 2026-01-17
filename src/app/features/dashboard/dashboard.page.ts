@@ -4,7 +4,6 @@ import { TabSwitcherComponent } from '../../shared/components/tab-switcher/tab-s
 import { DashboardSignalStore } from './store/dashboard.signal-store';
 import { DevicesSignalStore } from '../devices/store/devices.signal-store';
 
-
 @Component({
   selector: 'app-dashboard',
   imports: [TabSwitcherComponent, RouterModule],
@@ -12,19 +11,13 @@ import { DevicesSignalStore } from '../devices/store/devices.signal-store';
   styleUrl: './dashboard.page.scss',
   providers: [DashboardSignalStore, DevicesSignalStore],
 })
+
 export class DashboardPage implements OnInit {
-  dashboardID = signal<string | null>(null);
+  public dashboardID = signal<string | null>(null);
   readonly dashboardStore = inject(DashboardSignalStore);
   readonly devicesStore = inject(DevicesSignalStore);
   private route = inject(ActivatedRoute);
 
-  constructor() {
-    effect(() => {
-      //  console.log('EDIT MODE:', this.dashboardStore.isEditMode());
-       console.log('TABS:', this.dashboardStore.tabs());
-      //  console.log('SNAPSHOT:', this.dashboardStore.snapshotTabs());
-    });
-  }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const dashboardId = params.get('dashboardId');
