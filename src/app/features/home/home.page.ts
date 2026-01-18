@@ -34,12 +34,12 @@ export class HomePage implements OnInit {
   isMobile = false;
   @ViewChild(MatSidenav)
   sidenav?: MatSidenav;
-
+  readonly dashboardStore = inject(DashboardSignalStore);
   private router = inject(Router);
   private sidebarService = inject(SidebarService);
   private readonly authService = inject(AuthService);
 
-  public isLoading = computed(() => this.authService.isLoading());
+  public isLoading = computed(() => this.dashboardStore.loading());
 
   ngOnInit() {
     this.checkScreen();
@@ -64,7 +64,7 @@ export class HomePage implements OnInit {
     this.isMobile = window.innerWidth <= 768;
   }
   constructor() {
-    console.log(this.isLoading());
+  
     effect(() => {
       const dashboards = this.sidebarService.getDashboardNavArray();
 

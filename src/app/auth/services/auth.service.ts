@@ -20,7 +20,7 @@ export interface UserProfile {
 })
 export class AuthService {
   readonly isAuthenticated = signal(false);
-  public isLoading: WritableSignal<boolean> = signal<boolean>(false);
+  readonly loading: WritableSignal<boolean> = signal(false);
   readonly userProfile = signal<UserProfile | null>(null);
 
   private readonly http = inject(HttpClient);
@@ -28,7 +28,7 @@ export class AuthService {
   private readonly tokenService = inject(TokenService);
 
   checkUserAuthentication() {
-    console.log(this.isLoading());
+    this.loading.set(true);
     return this.http.get<UserProfile>('/user/profile').pipe(
       map((data) => {
         if (data) {
@@ -40,10 +40,10 @@ export class AuthService {
           return false;
         }
       }),
-      finalize(() => this.isLoading.set(false))
-      
+      finalize(() => {
+        this.loading.set(false);
+      })
     );
-    
   }
 
   completeLogin(token: string): void {
