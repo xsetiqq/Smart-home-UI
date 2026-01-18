@@ -3,14 +3,17 @@
   <mat-icon>menu</mat-icon>
 </button>
 }
-
-<mat-sidenav-container class="container-mat-sidenav">
+@if (isLoading()) {
+  <app-loading />
+} @else {
+ <mat-sidenav-container class="container-mat-sidenav">
   @if (isAuthenticated()) {
   <mat-sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile">
     <div class="sidebar-header">
-      <h1>Smart Home UI</h1>
+      <h1>Smart Home UI </h1>
+          
     </div>
-
+  
     <div class="sidebar-main">
       <app-sidebar />
     </div>
@@ -26,10 +29,10 @@
   }
 
   <mat-sidenav-content>
-      @if (isAuthenticated() === undefined) {
-    <app-loading></app-loading>
-  } @else {
+
     <router-outlet />
-  }
+  
   </mat-sidenav-content>
 </mat-sidenav-container>
+}
+

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIcon } from '@angular/material/icon';
 import { SidebarService } from './services/sidebar.service';
+import { DashboardSignalStore } from '../../../features/dashboard/store/dashboard.signal-store';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +17,10 @@ import { SidebarService } from './services/sidebar.service';
 export class SidebarComponent implements OnInit {
   private readonly sidebarService = inject(SidebarService);
   readonly dashboardsArrays = computed(() => this.sidebarService.getDashboardNavArray());
+  private readonly dashboardStore = inject(DashboardSignalStore);
 
+  readonly isEditMode = this.dashboardStore.isEditMode;
+  
   ngOnInit(): void {
     this.sidebarService.loadDashboardsNavArray();
   }

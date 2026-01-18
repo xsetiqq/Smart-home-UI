@@ -1,8 +1,9 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from './local-storage.service';
 import { map } from 'rxjs/internal/operators/map';
+import { finalize } from 'rxjs/internal/operators/finalize';
 
 
 interface LoginResponse {
@@ -19,13 +20,15 @@ export interface UserProfile {
 })
 export class AuthService {
   readonly isAuthenticated = signal(false);
+  public isLoading: WritableSignal<boolean> = signal<boolean>(false);
   readonly userProfile = signal<UserProfile | null>(null);
- 
+
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly tokenService = inject(TokenService);
-  
+
   checkUserAuthentication() {
+    console.log(this.isLoading());
     return this.http.get<UserProfile>('/user/profile').pipe(
       map((data) => {
         if (data) {
@@ -33,14 +36,16 @@ export class AuthService {
           this.userProfile.set(data);
           return true;
         } else {
-          this.logout();  
+          this.logout();
           return false;
         }
       }),
+      finalize(() => this.isLoading.set(false))
       
-
     );
+    
   }
+
   completeLogin(token: string): void {
     this.tokenService.setToken(token);
     this.checkUserAuthentication().subscribe();

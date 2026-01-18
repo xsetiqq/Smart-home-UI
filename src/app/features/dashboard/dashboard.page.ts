@@ -9,7 +9,7 @@ import { DevicesSignalStore } from '../devices/store/devices.signal-store';
   imports: [TabSwitcherComponent, RouterModule],
   templateUrl: './dashboard.page.html',
   styleUrl: './dashboard.page.scss',
-  providers: [DashboardSignalStore, DevicesSignalStore],
+ 
 })
 
 export class DashboardPage implements OnInit {
