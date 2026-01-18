@@ -14,7 +14,12 @@
         <app-sidebar />
       </div>
       <div class="sidebar-footer">
-        </div>
+      <div class="avatar">{{ userProfile()?.initials }}</div>
+      <div class="footer-info">{{ userProfile()?.fullName }}. Angular</div>
+      <button class="logout-button" (click)="handleLogout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
     </mat-sidenav>
   }
 
