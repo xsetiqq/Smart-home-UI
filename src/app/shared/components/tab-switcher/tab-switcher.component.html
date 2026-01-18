@@ -1,7 +1,11 @@
 @if (isEditMode()) {
   <div class="dashboard-name">
     Editing dashboard: <span>{{ dashboardId() | titlecase }} </span>
+      <button (click)="onDelete()" class="icon-btn padding-none">
+        <mat-icon>delete</mat-icon>
+      </button>
   </div>
+   
 }
 
 <nav
@@ -127,9 +131,7 @@
       <button (click)="onEdit()" class="icon-btn">
         <mat-icon>edit</mat-icon>
       </button>
-      <button (click)="onDelete()" class="icon-btn">
-        <mat-icon>delete</mat-icon>
-      </button>
+   
     } @else {
       <button (click)="onSave()" class="icon-btn">
         <mat-icon>save</mat-icon>

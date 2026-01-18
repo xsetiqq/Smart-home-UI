@@ -1,5 +1,5 @@
-import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals'; // + withComputed
-import { computed, inject } from '@angular/core'; // + computed
+import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
+import { computed, inject } from '@angular/core'; 
 import { DeviceItem } from '../../../shared/models/device.model';
 import { SensorItem } from '../../../shared/models/sensor.model';
 import { DevicesService } from '../service/devices.service';

@@ -4,7 +4,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 
 import { DashboardSignalStore } from '../../../features/dashboard/store/dashboard.signal-store';
-import { MatIcon } from "@angular/material/icon";
+import { MatIcon } from '@angular/material/icon';
+import { DeleteDashboardDialogComponent } from '../delete-dashboard-dialog/delete-dashboard-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SidebarService } from '../sidebar/services/sidebar.service';
 /* eslint-disable @typescript-eslint/member-ordering */
 @Component({
   selector: 'app-tab-switcher',
@@ -17,6 +20,8 @@ export class TabSwitcherComponent {
 
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly dialog = inject(MatDialog);
+  private readonly sidebarService = inject(SidebarService);
 
   readonly isEditMode = this.dashboardStore.isEditMode;
   readonly tabs = this.dashboardStore.tabs;
@@ -37,8 +42,27 @@ export class TabSwitcherComponent {
   }
 
   onDelete() {
-    console.log('Надо модалку сделать с подтверждением');
-    // this.dashboardStore.deleteCurrentDashboard();
+    const dialogRef = this.dialog.open(DeleteDashboardDialogComponent, {
+      width: '100%',
+      maxWidth: '400px',
+      panelClass: 'transparent-dialog-container',
+      data: {
+        title: 'Delete Dashboard',
+        message: 'Are you sure you want to delete this dashboard? This action cannot be undone.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.dashboardStore.deleteCurrentDashboard();
+        this.sidebarService.loadDashboardsNavArray();
+        this.router.navigate([
+          '/dashboard',
+          this.sidebarService.getDashboardNavArray()[0]?.id || '',
+        ]);
+      }
+      
+    });
   }
 
   onTabRename(tabId: string, newTitle: string) {
@@ -75,7 +99,7 @@ export class TabSwitcherComponent {
   moveTabRight(tabId: string) {
     this.dashboardStore.reorderTab(tabId, 'right');
   }
-  
+
   isFirstTab(tabId: string): boolean {
     return this.tabs()[0]?.id === tabId;
   }

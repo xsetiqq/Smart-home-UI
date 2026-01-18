@@ -8,6 +8,10 @@ import { Dashboard, DashboardTab } from '../../../shared/models/dashboard.model'
 export class DashboardsService {
   private http = inject(HttpClient);
   private readonly url = '/dashboards';
+
+  createDashboard(payload: { id: string; title: string; icon: string }) {
+    return this.http.post<Dashboard>(this.url, payload);
+  }
   
   deleteDashboard(dashboardId: string) {
     return this.http.delete<void>(`${this.url}/${dashboardId}`);

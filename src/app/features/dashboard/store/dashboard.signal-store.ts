@@ -91,6 +91,9 @@ export const DashboardSignalStore = signalStore(
           },
         });
     },
+    createDashboard(dashboardId: string, title: string, icon: string) {
+      dashboardsService.createDashboard({ id: dashboardId, title, icon }).subscribe();
+    },
     addTab(title: string) {
       if (!store.isEditMode()) return;
 
