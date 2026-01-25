@@ -1,1 +1,8 @@
 <router-outlet></router-outlet>
+
+@if (isLoading()) {
+  <div class="loading-overlay">
+    <app-loading />
+    <p>First load can be slow, because backend server needs to wake up from sleep mode.</p>
+  </div>
+}

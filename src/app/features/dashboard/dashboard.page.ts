@@ -9,22 +9,15 @@ import { DevicesSignalStore } from '../devices/store/devices.signal-store';
   imports: [TabSwitcherComponent, RouterModule],
   templateUrl: './dashboard.page.html',
   styleUrl: './dashboard.page.scss',
-  providers: [DashboardSignalStore, DevicesSignalStore],
+ 
 })
+
 export class DashboardPage implements OnInit {
-  dashboardID = signal<string | null>(null);
+  public dashboardID = signal<string | null>(null);
   readonly dashboardStore = inject(DashboardSignalStore);
   readonly devicesStore = inject(DevicesSignalStore);
   private route = inject(ActivatedRoute);
 
-  constructor() {
-    effect(() => {
-      console.log('STORE TABS:', this.dashboardStore.tabs());
-      console.log('LOADING:', this.dashboardStore.loading());
-      console.log('DEVICES LOADING:', this.devicesStore.loading());
-      console.log('DEVICES ENTITIES:', this.devicesStore.entities());
-    });
-  }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const dashboardId = params.get('dashboardId');
@@ -34,7 +27,7 @@ export class DashboardPage implements OnInit {
 
       this.dashboardID.set(dashboardId);
       this.devicesStore.loadDevices();
-      this.dashboardStore.loadDashboard(dashboardId);
+      this.dashboardStore.loadDashboard(dashboardId);       
     });
   }
 }

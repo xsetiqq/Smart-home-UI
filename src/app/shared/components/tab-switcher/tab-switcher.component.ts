@@ -4,10 +4,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 
 import { DashboardSignalStore } from '../../../features/dashboard/store/dashboard.signal-store';
+import { MatIcon } from '@angular/material/icon';
+import { DeleteDashboardDialogComponent } from '../delete-dashboard-dialog/delete-dashboard-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SidebarService } from '../sidebar/services/sidebar.service';
 /* eslint-disable @typescript-eslint/member-ordering */
 @Component({
   selector: 'app-tab-switcher',
-  imports: [MatTabsModule, CommonModule, RouterModule],
+  imports: [MatTabsModule, CommonModule, RouterModule, MatIcon],
   templateUrl: './tab-switcher.component.html',
   styleUrl: './tab-switcher.component.scss',
 })
@@ -16,9 +20,94 @@ export class TabSwitcherComponent {
 
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly dialog = inject(MatDialog);
+  private readonly sidebarService = inject(SidebarService);
 
+  readonly isEditMode = this.dashboardStore.isEditMode;
   readonly tabs = this.dashboardStore.tabs;
+  readonly dashboardId = this.dashboardStore.dashboardId;
+  public editingTabId: string | null = null;
+  public isInputOpen: boolean = false;
 
+  onEdit() {
+    this.dashboardStore.enterEditMode();
+  }
+
+  onSave() {
+    this.dashboardStore.saveDashboard();
+  }
+
+  onDiscard() {
+    this.dashboardStore.discardChanges();
+  }
+
+  onDelete() {
+    const dialogRef = this.dialog.open(DeleteDashboardDialogComponent, {
+      width: '100%',
+      maxWidth: '400px',
+      panelClass: 'transparent-dialog-container',
+      data: {
+        title: 'Delete Dashboard',
+        message: 'Are you sure you want to delete this dashboard? This action cannot be undone.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.dashboardStore.deleteCurrentDashboard();
+        this.sidebarService.loadDashboardsNavArray();
+        this.router.navigate([
+          '/dashboard',
+          this.sidebarService.getDashboardNavArray()[0]?.id || '',
+        ]);
+      }
+      
+    });
+  }
+
+  onTabRename(tabId: string, newTitle: string) {
+    this.dashboardStore.renameTab(tabId, newTitle);
+    this.editingTabId = null;
+  }
+
+  onDeleteTab(tabId: string) {
+    this.dashboardStore.removeTab(tabId);
+    this.editingTabId = null;
+  }
+
+  onTabEdit(tabId: string) {
+    this.editingTabId = tabId;
+  }
+
+  onIsInputOpen(isOpen: boolean) {
+    this.isInputOpen = isOpen;
+  }
+  onAddNewTab(raw: string) {
+    if (!raw) return;
+
+    const value = raw.trim();
+
+    if (value.length < 3 || value.length > 50) return;
+    this.dashboardStore.addTab(value);
+    this.onIsInputOpen(false);
+  }
+
+  moveTabLeft(tabId: string) {
+    this.dashboardStore.reorderTab(tabId, 'left');
+  }
+
+  moveTabRight(tabId: string) {
+    this.dashboardStore.reorderTab(tabId, 'right');
+  }
+
+  isFirstTab(tabId: string): boolean {
+    return this.tabs()[0]?.id === tabId;
+  }
+
+  isLastTab(tabId: string): boolean {
+    const tabs = this.tabs();
+    return tabs[tabs.length - 1]?.id === tabId;
+  }
   constructor() {
     effect(() => {
       const tabs = this.tabs();
@@ -42,7 +131,9 @@ export class TabSwitcherComponent {
         return;
       }
 
-     
+      if (this.editingTabId && this.editingTabId !== tabId) {
+        this.editingTabId = null;
+      }
     });
   }
 }

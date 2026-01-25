@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 
 import { SidebarService } from '../../shared/components/sidebar/services/sidebar.service';
 import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { DevicesSignalStore } from '../devices/store/devices.signal-store';
+import { DashboardSignalStore } from '../dashboard/store/dashboard.signal-store';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +26,7 @@ import { LoadingComponent } from '../../shared/components/loading/loading.compon
   ],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
+  providers: [DashboardSignalStore, DevicesSignalStore],
 })
 export class HomePage implements OnInit {
   readonly isAuthenticated = computed(() => this.authService.isAuthenticated());
@@ -31,11 +34,12 @@ export class HomePage implements OnInit {
   isMobile = false;
   @ViewChild(MatSidenav)
   sidenav?: MatSidenav;
-
+  readonly dashboardStore = inject(DashboardSignalStore);
   private router = inject(Router);
   private sidebarService = inject(SidebarService);
   private readonly authService = inject(AuthService);
 
+  public isLoading = computed(() => this.dashboardStore.loading());
 
   ngOnInit() {
     this.checkScreen();
@@ -60,7 +64,7 @@ export class HomePage implements OnInit {
     this.isMobile = window.innerWidth <= 768;
   }
   constructor() {
-
+  
     effect(() => {
       const dashboards = this.sidebarService.getDashboardNavArray();
 

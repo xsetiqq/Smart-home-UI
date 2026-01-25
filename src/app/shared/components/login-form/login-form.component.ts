@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatIcon,
+    MatIcon
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
@@ -51,7 +51,7 @@ export class LoginFormComponent {
       error: (err) => {
         this.isLoading = false;
         console.error('Login failed', err.error);
-        this.errorMessage = err?.error || 'Unknown error occurred. Please try again later.';
+        this.errorMessage = 'Unknown error occurred. Please try again later.';
       },
     });
   }

@@ -21,12 +21,18 @@ h1 {
   color: #d4d4d4;
 }
 
+::ng-deep .white-spinner circle {
+  stroke: #ffffff !important; 
+}
+
+
 .form-box button {
   padding: 8px 12px;
   font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 button.mat-mdc-button-disabled {
   background-color: #0e305e;
@@ -34,6 +40,7 @@ button.mat-mdc-button-disabled {
 }
 .auth-error {
   text-align: center;
+  color: #ff6b6b;
   display: flex;
   justify-content: center;
   align-items: center;

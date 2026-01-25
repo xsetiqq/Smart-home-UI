@@ -1,0 +1,200 @@
+.dialog-container {
+  background-color: #1f1f1f;
+  color: #e1e1e1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+
+  h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+.dialog-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex-grow: 1;
+
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 24px 0 12px;
+    color: #e1e1e1;
+  }
+}
+
+.dialog-actions {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  border-top: 1px solid #333;
+
+  button {
+    font-weight: 500;
+    color: #4aa3ff;
+
+  }
+
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
+.input-group {
+  background: #2b2b2b;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-bottom: 1px solid #555;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+
+    &::placeholder {
+      color: #555;
+    }
+  }
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.list-item {
+  background: #2b2b2b;
+  padding: 8px 8px 8px 16px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .item-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    mat-icon {
+      color: #aaa;
+    }
+    span {
+      font-size: 14px;
+    }
+  }
+}
+
+.add-select-container {
+  margin-top: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  mat-form-field {
+    width: 100%;
+    display: block;
+  }
+
+  ::ng-deep {
+    .mat-mdc-text-field-wrapper {
+      background-color: #2b2b2b !important;
+      border-radius: 4px;
+      border-bottom: 1px solid #555;
+      padding: 0 12px;
+    }
+
+    .mdc-line-ripple {
+      display: none;
+    }
+
+    .mat-mdc-form-field-infix {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      min-height: unset;
+      width: auto;
+    }
+
+    .mdc-floating-label,
+    .mat-mdc-select-value {
+      color: #e1e1e1;
+      font-size: 16px;
+    }
+
+    .mat-mdc-select-arrow {
+      color: #aaa;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
+}
+
+::ng-deep .dark-panel {
+  background-color: #2b2b2b !important;
+  margin-top: 4px;
+  border-radius: 4px;
+
+  min-width: 100%;
+
+  .mat-mdc-option {
+    color: #e1e1e1 !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    mat-icon {
+      margin-right: 12px;
+      color: #aaa;
+    }
+  }
+
+  .mat-mdc-option.mdc-list-item--selected {
+    background-color: rgba(79, 172, 254, 0.15);
+    .mdc-list-item__primary-text {
+      color: #4facfe !important;
+    }
+  }
+}

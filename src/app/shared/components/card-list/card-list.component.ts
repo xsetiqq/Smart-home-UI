@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardSignalStore } from '../../../features/dashboard/store/dashboard.signal-store';
+import { AddCardBtnComponent } from "../add-card-btn/add-card-btn.component";
 /* eslint-disable @typescript-eslint/member-ordering */
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule, CardComponent, AddCardBtnComponent],
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
   host: { class: 'card-list' },
@@ -22,12 +23,13 @@ export class CardListComponent {
     this.route.paramMap.subscribe((params) => {
       this.tabId.set(params.get('tabId'));
     });
+  
   }
 
   readonly activeTab = computed(() => {
     const tabs = this.dashboardStore.tabs();
     const tabId = this.tabId();
-
+ 
     if (!tabId || !tabs.length) return null;
 
     return tabs.find((t) => t.id === tabId) ?? null;
