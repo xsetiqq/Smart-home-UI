@@ -1,9 +1,24 @@
+
+:host {
+  display: block;
+  height: 100%; 
+  width: 100%;
+}
+
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+  box-sizing: border-box; 
+}
+
 .menu {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  flex-grow: 1; 
+  overflow-y: auto; 
 }
-
 .menu-item {
   padding: 10px 14px;
   text-decoration: none;
@@ -17,18 +32,44 @@
   font-weight: 500;
 }
 
-
 .menu-item.active {
   background: rgba(0, 132, 255, 0.2);
   color: #26d6f5;
 }
 
-
 .menu-item.active mat-icon {
   color: #26d6f5;
 }
 
-
 .menu-item.active::before {
   content: none;
+}
+
+.add-dashboard-btn{
+  margin-top: auto;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #bfc7d5;
+  border-radius: 3px;
+  font-size: 15px;
+  display: flex; 
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+    margin: 10px;
+}
+.add-dashboard-btn:hover {
+  background: rgba(0, 132, 255, 0.2);
+  color: #26d6f5;
+  
+}
+.menu-item.active {
+  pointer-events: none; 
+  cursor: default;      
+
 }

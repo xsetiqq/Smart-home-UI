@@ -1,23 +1,34 @@
+@let dashboardsArray = dashboardsArrays();
+
 <div class="sidebar-inner">
-  <nav class="menu">
-
-    <a 
-      routerLink="/dashboard"
-      routerLinkActive="active"
-    
-      class="menu-item"
-    >
-     <mat-icon>apps</mat-icon> Overview
-    </a>
-
-    <a 
-      routerLink="/about"
-      routerLinkActive="active"
-    
-      class="menu-item"
-    >
-     <mat-icon>info</mat-icon> About
-    </a>
-
-  </nav>
+  @if (dashboardsArray === null) {
+    <p>Loading dashboards...</p>
+  } @else if (dashboardsArray.length === 0) {
+    <p class="empty">
+      You don’t have any dashboards yet.
+      They’ll appear here as soon as you create them.
+    </p>
+  } @else {
+    <nav class="menu">
+      @for (dashboard of dashboardsArray; track dashboard.id) {
+        <a
+          [routerLink]="['/dashboard', dashboard.id]"
+          routerLinkActive="active"
+          class="menu-item"
+        >
+          <mat-icon>{{ dashboard.icon }}</mat-icon>
+          {{ dashboard.title }}
+        </a>
+      }
+    </nav>
+    @if (isEditMode()){
+       <div
+          class="add-dashboard-btn"
+          (click)="openAddDashboardDialog()"
+        >
+          <mat-icon> add </mat-icon>
+          add new dashboard
+        </div>
+    }
+  }
 </div>

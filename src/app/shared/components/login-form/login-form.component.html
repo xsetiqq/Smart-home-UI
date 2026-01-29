@@ -1,0 +1,40 @@
+<div class="form">
+  <h1>Login</h1>
+  <form class="form-box" [formGroup]="loginForm">
+    <mat-form-field>
+      <mat-label>Enter Name</mat-label>
+      <input matInput placeholder="Donald" formControlName="username" />
+
+      @if (!loginForm.controls.username.valid && loginForm.controls.username.touched) {
+      <mat-error> Username is required </mat-error>
+
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Enter password</mat-label>
+      <input
+        matInput
+        placeholder="Enter your password"
+        formControlName="password"
+        type="password"
+      />
+      @if (!loginForm.controls.password.valid && loginForm.controls.password.touched) {
+      <mat-error> Password is required </mat-error>
+      }
+    </mat-form-field>
+
+    <button type="submit" matButton="filled" (click)="handleSubmit()" [disabled]="!loginForm.valid">
+      @if (isLoading) {
+      <mat-spinner class="white-spinner" diameter="20"></mat-spinner>
+      } @else { Login }
+    </button>
+  </form>
+  <div class="auth-error">
+    @if (errorMessage) {
+    <mat-icon>error</mat-icon>
+    {{ errorMessage }}
+    } @else {
+    <span class="auth-error-placeholder">&nbsp;</span>
+    }
+  </div>
+</div>

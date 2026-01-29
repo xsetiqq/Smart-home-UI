@@ -1,0 +1,53 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2>Create New Dashboard</h2>
+    <button class="icon-btn" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content">
+    <form [formGroup]="form" class="form-container">
+      
+      <div class="input-group">
+        <label>Dashboard ID (Unique)</label>
+        <input type="text" formControlName="id" placeholder="e.g. kitchen-main">
+        
+        @if (form.get('id')?.hasError('required') && form.get('id')?.touched) {
+          <span class="error">ID is required</span>
+        }
+        @if (form.get('id')?.hasError('maxlength')) {
+          <span class="error">Max 30 characters</span>
+        }
+        @if (form.get('id')?.hasError('notUnique')) {
+          <span class="error">This ID is already taken</span>
+        }
+      </div>
+
+      <div class="input-group">
+        <label>Title</label>
+        <input type="text" formControlName="title" placeholder="e.g. My Kitchen">
+         @if (form.get('title')?.hasError('required') && form.get('title')?.touched) {
+          <span class="error">Title is required</span>
+        }
+         @if (form.get('title')?.hasError('maxlength')) {
+          <span class="error">Max 50 characters</span>
+        }
+      </div>
+
+      <div class="input-group">
+        <label>Icon (Material Icon Name)</label>
+        <div class="icon-input-wrapper">
+            <mat-icon class="preview-icon">{{ form.get('icon')?.value }}</mat-icon>
+            <input type="text" formControlName="icon" placeholder="e.g. home">
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-button mat-dialog-close>CANCEL</button>
+    <button mat-button color="primary" (click)="submit()" [disabled]="form.invalid">CREATE</button>
+  </div>
+</div>

@@ -1,21 +1,139 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, effect, inject, Input } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
-import { CardListComponent } from "../card-list/card-list.component";
-import { TabSwitcherService } from './services/tab-switcher.service';
 
+import { DashboardSignalStore } from '../../../features/dashboard/store/dashboard.signal-store';
+import { MatIcon } from '@angular/material/icon';
+import { DeleteDashboardDialogComponent } from '../delete-dashboard-dialog/delete-dashboard-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SidebarService } from '../sidebar/services/sidebar.service';
+/* eslint-disable @typescript-eslint/member-ordering */
 @Component({
   selector: 'app-tab-switcher',
-  imports: [MatTabsModule, CommonModule, CardListComponent],
+  imports: [MatTabsModule, CommonModule, RouterModule, MatIcon],
   templateUrl: './tab-switcher.component.html',
   styleUrl: './tab-switcher.component.scss',
 })
-/* eslint-disable @typescript-eslint/member-ordering */
 export class TabSwitcherComponent {
-  private readonly tabSwitcherService = inject(TabSwitcherService);
-  readonly tabs = computed(() => this.tabSwitcherService.getTabs());
+  private readonly dashboardStore = inject(DashboardSignalStore);
 
-  ngOnInit(): void {
-    this.tabSwitcherService.loadDashboard();
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly dialog = inject(MatDialog);
+  private readonly sidebarService = inject(SidebarService);
+
+  readonly isEditMode = this.dashboardStore.isEditMode;
+  readonly tabs = this.dashboardStore.tabs;
+  readonly dashboardId = this.dashboardStore.dashboardId;
+  public editingTabId: string | null = null;
+  public isInputOpen: boolean = false;
+
+  onEdit() {
+    this.dashboardStore.enterEditMode();
+  }
+
+  onSave() {
+    this.dashboardStore.saveDashboard();
+  }
+
+  onDiscard() {
+    this.dashboardStore.discardChanges();
+  }
+
+  onDelete() {
+    const dialogRef = this.dialog.open(DeleteDashboardDialogComponent, {
+      width: '100%',
+      maxWidth: '400px',
+      panelClass: 'transparent-dialog-container',
+      data: {
+        title: 'Delete Dashboard',
+        message: 'Are you sure you want to delete this dashboard? This action cannot be undone.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.dashboardStore.deleteCurrentDashboard();
+        this.sidebarService.loadDashboardsNavArray();
+        this.router.navigate([
+          '/dashboard',
+          this.sidebarService.getDashboardNavArray()[0]?.id || '',
+        ]);
+      }
+      
+    });
+  }
+
+  onTabRename(tabId: string, newTitle: string) {
+    this.dashboardStore.renameTab(tabId, newTitle);
+    this.editingTabId = null;
+  }
+
+  onDeleteTab(tabId: string) {
+    this.dashboardStore.removeTab(tabId);
+    this.editingTabId = null;
+  }
+
+  onTabEdit(tabId: string) {
+    this.editingTabId = tabId;
+  }
+
+  onIsInputOpen(isOpen: boolean) {
+    this.isInputOpen = isOpen;
+  }
+  onAddNewTab(raw: string) {
+    if (!raw) return;
+
+    const value = raw.trim();
+
+    if (value.length < 3 || value.length > 50) return;
+    this.dashboardStore.addTab(value);
+    this.onIsInputOpen(false);
+  }
+
+  moveTabLeft(tabId: string) {
+    this.dashboardStore.reorderTab(tabId, 'left');
+  }
+
+  moveTabRight(tabId: string) {
+    this.dashboardStore.reorderTab(tabId, 'right');
+  }
+
+  isFirstTab(tabId: string): boolean {
+    return this.tabs()[0]?.id === tabId;
+  }
+
+  isLastTab(tabId: string): boolean {
+    const tabs = this.tabs();
+    return tabs[tabs.length - 1]?.id === tabId;
+  }
+  constructor() {
+    effect(() => {
+      const tabs = this.tabs();
+
+      if (!tabs.length) return;
+
+      const tabId = this.route.firstChild?.snapshot.paramMap.get('tabId');
+
+      const firstTab = tabs[0];
+      if (!firstTab) return;
+
+      if (!tabId) {
+        this.router.navigate([firstTab.id], { relativeTo: this.route });
+        return;
+      }
+
+      const validTab = tabs.find((t) => t.id === tabId) ?? firstTab;
+
+      if (tabId !== validTab.id) {
+        this.router.navigate([validTab.id], { relativeTo: this.route });
+        return;
+      }
+
+      if (this.editingTabId && this.editingTabId !== tabId) {
+        this.editingTabId = null;
+      }
+    });
   }
 }

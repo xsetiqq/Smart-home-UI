@@ -48,10 +48,9 @@ body {
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
   // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
-
+  background-color: #121212;
   // Reset the user agent margin.
   margin: 0;
 }
@@ -75,3 +74,25 @@ h2 {
     font-weight: 500;
     unicode-bidi: isolate;
 }
+
+
+.mat-mdc-tab-link,
+.mat-mdc-tab-link:hover,
+.mat-mdc-tab-link:focus,
+.mat-mdc-tab-link:active {
+  color: #fff !important;
+}
+
+
+
+
+.mat-mdc-tab-link .mdc-tab__text-label {
+  color: inherit !important;
+}
+.transparent-dialog-container .mat-mdc-dialog-container,
+.transparent-dialog-container .mat-mdc-dialog-surface {
+  background: transparent !important; 
+  box-shadow: none !important;       
+  border: none !important;
+}
+

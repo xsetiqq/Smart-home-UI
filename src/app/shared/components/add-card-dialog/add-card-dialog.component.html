@@ -1,0 +1,75 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <h2>Select Card Layout</h2>
+    <button class="icon-btn" mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content layout-grid">
+
+    <div class="layout-option" mat-ripple [mat-dialog-close]="'verticalLayout'">
+      <h3>Entities</h3>
+      <div class="preview-card vertical">
+        <div class="row-item">
+          <div class="start">
+            <mat-icon class="icon-blue">co2</mat-icon>
+            <span>CO2 Sensor</span>
+          </div>
+          <span class="value">520 ppm</span>
+        </div>
+        <div class="row-item">
+          <div class="start">
+            <mat-icon class="icon-blue">water_drop</mat-icon>
+            <span>Humidity</span>
+          </div>
+          <span class="value">45 %</span>
+        </div>
+        <div class="row-item">
+           <div class="start">
+             <mat-icon class="icon-blue">thermostat</mat-icon>
+             <span>Temp</span>
+           </div>
+           <span class="value">22 °C</span>
+         </div>
+      </div>
+    </div>
+
+    <div class="layout-option" mat-ripple [mat-dialog-close]="'singleDevice'">
+      <h3>Entity</h3>
+      <div class="preview-card single">
+        <div class="entity-row">
+          <div class="entity-info">
+             <mat-icon class="icon-blue">motion_photos_on</mat-icon>
+             <span>PWM Sensor</span>
+          </div>
+          <div class="entity-value">
+            230 RPM
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout-option" mat-ripple [mat-dialog-close]="'horizontalLayout'">
+      <h3>Glance</h3>
+      <div class="preview-card horizontal">
+        <div class="col-item">
+           <span class="label">Temp</span>
+           <mat-icon class="icon-blue">thermostat</mat-icon>
+           <span class="value">27.1 °C</span>
+        </div>
+        <div class="col-item">
+           <span class="label">Hum</span>
+           <mat-icon class="icon-blue">water_drop</mat-icon>
+           <span class="value">45 %</span>
+        </div>
+        <div class="col-item">
+           <span class="label">Sun</span>
+           <mat-icon class="icon-yellow">sunny</mat-icon>
+           <span class="value">Clear</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

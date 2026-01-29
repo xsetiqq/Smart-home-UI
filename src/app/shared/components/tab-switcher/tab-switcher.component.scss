@@ -1,8 +1,186 @@
 .stretched-tabs {
   background: rgba(26, 114, 165, 0.171);
   height: full height;
+  min-height: 56px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.dashboard-name {
+  color: #fff;
+  background: rgba(26, 114, 165, 0.171);
+  width: auto;
+  font-size: 25px;
+  padding: 12px 0px;
+  padding-top: 20px;
+  padding-left: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.dashboard-name span {
+  color: #ffd642;
 }
 
 .list-container {
   background: #131313;
+}
+
+.tab-actions {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.25);
+}
+
+.icon-btn mat-icon {
+  color: #fff;
+  font-size: 25px;
+  transition: transform 0.15s ease;
+}
+.padding-none {
+  padding: 0;
+  padding-left: 12px;
+}
+
+.tab-title-input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 8px;
+  padding: 4px 10px;
+  min-width: 120px;
+  max-width: 200px;
+
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.tab-title-input:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.tab-title-input:focus {
+  border-color: #ffd642;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(255, 214, 66, 0.25);
+}
+.tab-title-input-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tab-title-input {
+  padding-right: 34px;
+}
+.input-add-btn {
+  position: absolute;
+  right: 6px;
+
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: scale(1);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.input-add-btn mat-icon {
+  font-size: 24px;
+  color: #32ff09;
+}
+
+.input-add-btn:hover {
+  transform: scale(1.2);
+  opacity: 0.9;
+}
+.input-confirm-btn {
+  position: absolute;
+  right: 34px;
+
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: scale(1);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.input-delete-btn {
+  position: absolute;
+  right: 6px;
+
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: scale(1);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.input-delete-btn mat-icon {
+  font-size: 24px;
+  color: #ff4242;
+}
+
+.input-delete-btn:hover {
+  transform: scale(1.2);
+  opacity: 0.9;
+}
+
+.input-confirm-btn mat-icon {
+  font-size: 24px;
+  color: #ffd642;
+}
+
+.input-confirm-btn:hover {
+  transform: scale(1.2);
+  opacity: 0.9;
+}
+
+.icon-btn.disabled {
+  pointer-events: none;
+  opacity: 0.35;
+  transform: none !important;
+}
+.onIsInputOpen-btn{
+  min-height: 56px;
 }
