@@ -1,59 +1,67 @@
 # Angular Smart Home UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
+A sophisticated Angular-based dashboard for monitoring and controlling smart home devices. This project features a modular architecture, state-managed data flow, and a seamless "Edit Mode" for full dashboard customization.
 
-## Development server
+## Live Demo
 
-To start a local development server, run:
+Frontend: [[Link](https://deft-griffin-24aded.netlify.app/)]
 
-```bash
-ng serve
-```
+Backend: [[Repo](https://github.com/pavelrazuvalau/smart-home-json-server)]
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tech Stack & Tools
 
-## Code scaffolding
+* **Framework:** Angular 18/20+ 
+    * *Architecture:* Standalone Components, `inject()`-based dependency injection.
+    * *Templates:* Modern control flow syntax (`@if`, `@for`, `@switch`).
+* **State Management:** * **NgRx (Store & Effects):** Global state for dashboard configuration and device synchronization.
+    * **Angular Signals:** Granular reactive state for UI logic and Edit Mode transitions.
+* **Styling & UI:** SCSS (pre-processor), Angular Material components.
+* **Forms:** Reactive Forms with complex custom validation (uniqueness, length, and integrity checks).
+* **Code Quality:** * **ESLint:** Configured with the `unicorn` plugin.
+    * **TypeScript:** Strict mode enabled (zero usage of `any`).
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Local Setup
 
-```bash
-ng generate component component-name
-```
+To run this project locally, you need to set up both the backend and the frontend.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 1. Backend Service && Frontend
+This project uses a custom JSON-server based backend to handle persistence.
+* **Repository:** [pavelrazuvalau/smart-home-json-server](https://github.com/pavelrazuvalau/smart-home-json-server)
 
-```bash
-ng generate --help
-```
+1. Fork or clone the backend repository.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Install dependencies:
+   ```bash
+   npm start
+   ```
+4. Clone the backend repository.
+   ```bash
+   git clone https://github.com/xsetiqq/Smart-home-UI.git
+   ```
+5. Install dependencies & Start the development server:
+   ```bash
+   npm install & ng serve
+   ```
+   
+## Key Implementation Details
 
-## Building
+* **State Synchronization:** Device state changes are managed through **NgRx Effects**, ensuring that every toggle triggers a `PATCH` request to the backend for persistent updates and immediate UI feedback.
+* **Secure Interceptors:** A centralized **HTTP Interceptor** automatically:
+    * Attaches `Authorization: Bearer <token>` to all outgoing requests.
+    * Detects `401 Unauthorized` responses to clear invalid tokens and redirect users to the `/login` page.
+* **Dynamic Layouts:** The UI adaptively renders components based on API-driven metadata, supporting three distinct card layouts: `singleDevice`, `horizontalLayout`, and `verticalLayout`.
+* **Navigation Guards:** Secure routing is enforced using **Angular Route Guards**, preventing unauthorized access to dashboards and redirecting anonymous users to the authentication flow.
 
-To build the project run:
+## Gallery
 
-```bash
-ng build
-```
+<img width="1913" height="902" alt="image" src="https://github.com/user-attachments/assets/1e5652d9-1188-45f2-a49c-3bb2cb78e24e" />
+<img width="1900" height="902" alt="image" src="https://github.com/user-attachments/assets/0dcf7601-029d-444f-b4f1-c2491e75092d" />
+<img width="1908" height="902" alt="image" src="https://github.com/user-attachments/assets/ffa34ee7-44b5-423f-8c2a-4a7d04d3c080" />
+<img width="1829" height="870" alt="image" src="https://github.com/user-attachments/assets/2c628615-10d7-49b4-863c-3a91766a58d0" />
+<img width="1133" height="524" alt="image" src="https://github.com/user-attachments/assets/2bca3fc4-53e0-4d4b-ac22-3e4e1d8c1447" />
+<img width="1414" height="748" alt="image" src="https://github.com/user-attachments/assets/9ec98c96-12a3-43d6-a84e-ba2c9d11ca09" />
+<img width="1864" height="910" alt="image" src="https://github.com/user-attachments/assets/7d1a47c3-fc04-437c-b633-312c661804fa" />
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
